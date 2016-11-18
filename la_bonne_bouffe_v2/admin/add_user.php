@@ -30,7 +30,7 @@ if(!empty($_POST)){
 	if(!((bool)preg_match('#[A-Za-z0-9]{8,20}#', $post['password']))){
 		$errors[] = 'Le Mot de passe doit contenir entre 8 et 20 caractères (Pas de caractères spéciaux)';
 	}
-	if(!(bool)preg_match('#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#', $post['Email-take'])){
+	if(!(bool)preg_match('#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#', $post['email'])){
 		$errors[] = 'Veuillez entrer une adresse mail valide';
 	}
 	if(emailExist($post['email'], $bdd)){
