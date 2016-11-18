@@ -122,13 +122,18 @@ else {
 						<td><?=$value['date_publish'];?></td>
 						<td><?= ucfirst($value['firstname']).' '.$value['lastname'];?></td>
 						<td>
+							
 							<a href="edit_recipe.php?id=<?=$value['id'];?>"> 
 							<i class="fa fa-pencil"></i> Modifier</a>
-						</td>
-						<td><a style="color:red" href="delete_recipe.php?id=<?=$value['id'];?>"> 
-							<i class="fa fa-trash"></i> Supprimer</a>
-						</td>
 
+						</td>
+						<td>
+						<?php if($_SESSION['permission'] == 1): ?>
+							<a style="color:red" href="delete_recipe.php?id=<?=$value['id'];?>"> 
+							<i class="fa fa-trash"></i> Supprimer</a>
+							<?php endif; ?>
+						</td>
+							
 					</tr>
 				</tbody>
 
