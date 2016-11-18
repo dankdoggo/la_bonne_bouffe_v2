@@ -71,7 +71,7 @@ else {
 
 
 		 <!-- My CSS -->
-        <link href="css/styles.temp.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
 
 	</head>
 
