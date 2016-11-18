@@ -19,10 +19,10 @@ if(!empty($_POST)){
 		$errors[] = 'Votre Pseudo est déja utilisé';
 	}
 	if(empty($post['firstname']) || !minAndMaxLength($post['firstname'], 2, 20)){
-		$errors[] = 'Le pseudo doit contenir entre 2 et 20 caractères';
+		$errors[] = 'Le Nom doit contenir entre 2 et 20 caractères';
 	}
 	if(empty($post['lastname']) || !minAndMaxLength($post['lastname'], 2, 20)){
-		$errors[] = 'Le pseudo doit contenir entre 2 et 20 caractères';
+		$errors[] = 'Le Prénom doit contenir entre 2 et 20 caractères';
 	}
 	if(empty($post['password']) || !minAndMaxLength($post['password'], 8, 20)){
 		$errors[] = 'Le Mot de passe doit contenir entre 8 et 20 caractères';
