@@ -32,17 +32,27 @@ $logout = false;
 	<body>
 		<header><?php include 'header.php'; ?></header>
 
+            <br>
+                <br>
+                    <br>
+
+
 		<main class="container">
 			 <?php if(isset($_SESSION)): ?>
                     <!-- <h1 class="text-center text-info"><i class="fa fa-user-times"></i> Déconnexion</h1> -->
 		            <h1 class="text-center text-info">Etes vous sûr de vouloir vous déconnecter ?</h1>
-                    <hr>
-                     <div class="well">   
-                    <form method="post" class="form-horizontal">
-                    <div>
-                        	<input type="submit" name="Oui" value="Oui" placeholder="Se déconnecter"
+                    
+                    <br>
+                        <br>
+                            <br>
+
+
+                     <div class="">   
+                    <form method="post">
+                    <div id=pos_btn>
+                        	<input id="btndeco" type="submit" name="Oui" value="Oui" placeholder="Se déconnecter"
                      	   	class="btn btn-success">
-                        	<input type="submit" name="Non" value="Non" placeholder="Revenir à la page précédente"
+                        	<input id="btndeco" type="submit" name="Non" value="Non" placeholder="Revenir à la page précédente"
                         	class="btn btn-danger">
                     </div>
                     </form>
