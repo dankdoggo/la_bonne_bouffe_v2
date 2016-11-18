@@ -453,3 +453,20 @@ a{
 #btndeco{
 	width: 150px;
 }
+
+/***********La page edit slider***********/
+
+.contain-img-slider-back {
+	height: 9.6875em;
+	width: 10.6875em;
+	overflow: hidden;
+	position: relative;
+	margin: 0.5em;
+}
+
+.img-slider-back {
+	position: absolute;
+	left: -29%;
+	max-height: 100%;
+
+}

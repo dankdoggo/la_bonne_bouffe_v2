@@ -180,7 +180,7 @@ if($checkImg->execute()) {
 
 		<div class="row">
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 			<h2 style="font-size: 1.4em;">Edition des images défilantes de l'accueil</h2>
 
@@ -206,32 +206,30 @@ if($checkImg->execute()) {
 
 			</div>
 
-			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-				<h2 style="font-size: 1.4em;">Images du slider</h2>	
+				<h2 style="font-size: 1.4em;">Images actuelles du slider</h2>	
 
 				<br>
-				<br>
+     		
+				<?php if($videSliders === true) : ?>
 
-        		<?php if($videSliders === true):?>
-        			<div>
-						<p class="text-center alert alert-danger">Vous n'avez pas encore téléchargé d'images </p>
+					<div>
+						<p class=" text-center alert alert-danger">Vous n'avez pas encore téléchargé d'images</p>
 					</div>
 
+				
 				<?php elseif ($nbSliders != 0): ?>
 
 							<div>
 								<?php foreach ($sliders as $slider) :?>
-									<img class="" src="<?=$dirUpload.$slider['value'];?>">
-								
+
+								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 contain-img-slider-back">
+									<img class="img-slider-back" src="<?=$dirUpload.$slider['value'];?>">
+								</div>
 												
 								<?php endforeach; ?>
 
-
-
-
-
-								<p class="text-center alert alert-danger">dddddddaaa </p>
 							</div>
 
 
