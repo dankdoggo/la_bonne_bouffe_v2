@@ -23,7 +23,7 @@ require_once '../inc/connect.php';
                         <a href="my_profile.php"><li>MON PROFIL</li></a>
                         <a href="add_recipe.php"><li>AJOUTER UNE RECETTE</li></a>
                         <a href="list_recipe.php"><li>LISTE RECETTE</li></a>
-                        <a href=""><li><i class="fa fa-user-times"></i> SE DECONNECTER</li></a> 
+                        <a href="logout.php"><li><i class="fa fa-user-times"></i> SE DECONNECTER</li></a> 
                     <?php else: ?> 
                         <a href="index.php"><li><i class="fa fa-user"></i> SE CONNECTER</li></a>
                                       

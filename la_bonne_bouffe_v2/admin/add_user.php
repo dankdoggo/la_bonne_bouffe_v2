@@ -104,7 +104,7 @@ if(!empty($_POST)){
 		
 		<header></header>
 
-		<main class="cantainer">
+		<main class="container">
 
 		 	<div class="col-sm-6 col-sm-push-3">
 

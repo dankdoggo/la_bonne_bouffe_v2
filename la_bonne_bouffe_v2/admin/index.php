@@ -90,6 +90,9 @@ if(!empty($_POST)){
 	<!-- Formulaire de connexion -->
 	<div class="col-sm-6 col-sm-push-3">
 		<h1 class="text-center text-info">Se connecter</h1>
+
+		<div class="well">
+
 		<form method="post">
 			<label for="username">Nom d'utilisateur</label><br>
 			<input type="text" name="username" id="username" class="form-control">
@@ -101,6 +104,9 @@ if(!empty($_POST)){
 			<br>
 			<input type="submit" value="Se connecter" class="btn btn-primary">
 		</form>
+
+		</div>
+
 	</div>
 </body>
 </html>
