@@ -13,7 +13,7 @@ $errors = [];
 $post = [];
 $formValid = false;
 $hasError = false;
-$dirUpload = 'upload/';
+$dirUpload = '../uploads/uploads_recipe/';
 $updatePicture = false;
 
 

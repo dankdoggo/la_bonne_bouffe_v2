@@ -9,7 +9,7 @@ $errors = [];
 $updateAvatar = false;
 $updatePassword = false;
 $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
-$dirUpload = '../uploads/';
+$dirUpload = '../uploads/uploads_user/';
 
 if(!empty($_POST)){
 	$post = array_map('trim', array_map('strip_tags', $_POST)); 

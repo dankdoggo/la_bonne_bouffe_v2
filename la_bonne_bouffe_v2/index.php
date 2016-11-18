@@ -12,6 +12,15 @@ if($select->execute()){
 	var_dump($select->errorInfo());
 }
 
+$displayImg = $bdd->prepare('SELECT value FROM lbb_edit_home WHERE data LIKE "slide%"'); 
+
+if($displayImg->execute()) {
+    $sliders = $displayImg->fetchAll(PDO::FETCH_ASSOC);
+    $nbSliders = count($sliders);
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -41,8 +50,11 @@ if($select->execute()){
 	 	<!-- Police Google Font -->
 	    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> 
 	    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
+
+	    <!--appel librairy jquery-->
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 	            
-	     <!--Icone FontAwesome CDN Bootstrape-->
+	     <!--Icone FontAwesome CDN Bootstrap-->
 	    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> 
 	         
 	     <!--Feuille de style Bootstrape-->
@@ -57,18 +69,18 @@ if($select->execute()){
 	<body>
 	<div class="wrapper"> <!-- Wrapper comprenant header + main + footer -->
 
-			<?php include_once 'inc/header.php'; ?>		
+	<?php include_once 'inc/header.php'; ?>		
 	        
-	        <main>
+	<main>
+	<section id="section-slider">
 
-
-	        	<section id="section-slider">
-
-	        		<div class="bloc-slider center-block">
-	        			<img class="img-slider" src="uploads/resto.jpg">
-	        		</div>
-
-	        	</section>
+	<div class="bloc-slider center-block">
+		<img class="img-slider" src="">
+	</div>
+		
+		      
+		   
+    </section>
 
 	        	<section id="section-recipe">
 
@@ -120,21 +132,10 @@ if($select->execute()){
 
 
         
-        <!-- 
-*******************************************************************************************
-SCRIPTS DE FIN DE PAGE : NE PAS TOUCHER, NE RIEN ECRIRE APRES
-*******************************************************************************************
--->
-        <!-- jQuery -->
-<!--        <script src="js/jquery.js"></script>-->
-
-        <!-- Bootstrap Core JavaScript -->
-<!--        <script src="js/bootstrap.min.js"></script>-->
-
-        <!-- APPEL Jquery CDN-->
-   <!--     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
-        
-<!--    <script src="js/monscript"> </script>-->
+    
+    
+    <!--appel script personalisé-->
+    <script src="js/script.js"></script>
 
 
     </body>

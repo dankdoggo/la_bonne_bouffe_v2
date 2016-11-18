@@ -41,7 +41,7 @@ if(!empty($_FILES)) { // tant que les champs ne sont pas vides on effectue pas l
 
 					if(move_uploaded_file($tmp_name, $dirUpload.$pictureName)) {
 						$update = $bdd->prepare('UPDATE lbb_edit_home SET value = :nomImage WHERE data = "slide'.$key.'"');
-						$update->bindValue(':nomImage', $dirUpload.$pictureName);
+						$update->bindValue(':nomImage', 'uploads/uploads_slider/'.$pictureName);
 						
 						if($update->execute()){
 							$updateValid = true;
@@ -129,22 +129,6 @@ if($checkImg->execute()) {
     $videSliders = empty($sliders);
 }
 
-
-	
-
-    
-
-
-    
-
-   
-   
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -225,7 +209,7 @@ if($checkImg->execute()) {
 								<?php foreach ($sliders as $slider) :?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 contain-img-slider-back">
-									<img class="img-slider-back" src="<?=$slider['value'];?>">
+									<img class="img-slider-back" src="../<?=$slider['value'];?>">
 								</div>
 												
 								<?php endforeach; ?>
@@ -278,6 +262,7 @@ if($checkImg->execute()) {
 			</form>
 			</div>
 		</div>
+		<br>
 	</div>
 </body>
 </html>
