@@ -44,18 +44,21 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && !empty($_GET['id'])){
 			<div class="contain-img-list-recipe">
 				<img src="<?=$recipe['picture'];?>" alt="migale" class="img-list-recipe">
 			</div>
-			<!-- <div>
-				<h2 class="title-ingredient-preparation">Ingrédients</h2>
-				<ul>
-					<li>Oeufs</li>
-					<li>Migales</li>
-					<li>Mayo</li>
-				</ul>
-			</div> -->
+		
+
 			<div>
-				<h2 class="title-ingredient-preparation">Préparation de la recette</h2>
+				<h2 class="title-ingredient-preparation">Ingredients de la recette: </h2>
+				<p><?=$recipe['ingredient']?></p>
+			</div>
+
+
+			<div>
+				<h2 class="title-ingredient-preparation">Préparation de la recette: </h2>
 				<p><?=$recipe['content']?></p>
 			</div>
+
+
+
 			<p class="date-author-recipe">Publié le <?=$recipe['date_publish']?> par <?='Chef '.$recipe['firstname'].' '.$recipe['lastname'];?></p>
 
 		</section>

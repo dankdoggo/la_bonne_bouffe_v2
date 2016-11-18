@@ -24,12 +24,16 @@ if(!empty($_POST)){
 		$post[$key] = trim(strip_tags($value));
 	}
 
-	if(empty($post['title-take']) || !minAndMaxLength($post['title-take'], 5, 50)){
-			$errors[] = 'Merci d\'indiquer un titre de recette entre cinq et cinquante caractères';
+	if(empty($post['title-take']) || !minAndMaxLength($post['title-take'], 5, 140)){
+			$errors[] = 'Merci d\'indiquer un titre de recette entre cinq et cent quarante caractères';
 	}
 
-	if(empty($post['content-take']) || !minAndMaxLength($post['content-take'], 25, 1000)){
-			$errors[] = 'Merci d\'indiquer une présentation de recette d\'au moins 25 caractères';
+	if(empty($post['ingredient-take']) || !minAndMaxLength($post['ingredient-take'], 20, 1000)){
+			$errors[] = 'Merci d\'indiquer une liste d\'ingredients d\'au moins 20 caractères';
+	}
+
+	if(empty($post['content-take']) || !minAndMaxLength($post['content-take'], 20, 1000)){
+			$errors[] = 'Merci d\'indiquer une présentation de recette d\'au moins 20 caractères';
 	}
 
 	if(is_uploaded_file($_FILES['picture-take']['tmp_name']) || file_exists($_FILES['picture-take']['tmp_name'])){ // ici on sécurise en doublant l'info: uploadé et existant
@@ -60,15 +64,17 @@ if(!empty($_POST)){
 
 	if (count($errors) === 0) {
 
-		$columSQL = 'title = :Newtitle, content = :Newcontent, date_publish = NOW(), username_author = :Newauthor';
+		$columSQL = 'title = :Newtitle, ingredient = :Newingredient, content = :Newcontent, date_publish = NOW(), username_author = :Newauthor';
 
 		if ($updatePicture) {
 			$columSQL.= ', picture = :Newpicture';
 		}
 
 		$upd = $bdd->prepare('UPDATE lbb_recipe SET '.$columSQL.' WHERE id= :id');
+
 		$upd->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
 		$upd->bindValue(':Newtitle', $post['title-take']);
+		$upd->bindValue(':Newingredient', $post['ingredient-take']);
 		$upd->bindValue (':Newcontent', $post['content-take']);
 		$upd->bindValue (':Newauthor', $_SESSION['username']);
 
@@ -145,8 +151,8 @@ if(!empty($_POST)){
 				<h1 class="text-center">Modifier la recette</h1>
 				<hr>
 
-           		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($_SESSION['id']);?> </h3>
-
+           		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($_SESSION['username']);?> </h3>
+           		<br><br>
 
 				<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
 				<?php
@@ -161,22 +167,29 @@ if(!empty($_POST)){
 
 				<form method="POST" class="form-horizontal" enctype="multipart/form-data">
 
-					<label class="text-center text-info">Nom de la recette:</label>
+					<label for="title" class="text-center text-info">Nom de la recette:</label>
 					<br>
-					<input type="text" name="title-take" class="form-control" placeholder="Ex: Risotto de Saint Jacques et Chorizo" value="<?=$recipe['title'];?>">
+					<input id="title" type="text" name="title-take" class="form-control" value="<?=$recipe['title'];?>">
 
 					<br><br>
 
-					<label  class="text-center text-info">Description:</label>
+					<label for="ingredient " class="text-center text-info">Ingredients:</label>
 					<br>
-					<textarea name="content-take" class="form-control" placeholder="Ex: Pour préparer la recette du Risotto de Saint Jacques et Chorizo il vous faut : ..." ><?=$recipe['content'];?></textarea>
+					<textarea id="ingredient" name="ingredient-take" class="form-control"><?=$recipe['ingredient'];?>"</textarea>
+
+					<br><br>
+
+
+					<label for="recipe" class="text-center text-info">Description:</label>
+					<br>
+					<textarea id="recipe" name="content-take" class="form-control"><?=$recipe['content'];?></textarea>
 
 					<br><br>
 							
-					<label class="text-center text-info">Photo:</label>
+					<label for="photo" class="text-center text-info">Photo:</label>
 					<img src="<?=$recipe['picture'];?>" style="width:100px;">
 					<br><br>
-					<input type="file" name="picture-take" class="btn btn-default btn-lg" accept="image/*">
+					<input id="photo" type="file" name="picture-take" class="btn btn-default btn-lg" accept="image/*">
 
 					<br><br>
 
