@@ -20,7 +20,7 @@ if (!empty($_GET)) {
 
 } /*fermeture première condition !empty $_GET*/
 
-$search = $bdd->prepare('SELECT * FROM lbb_recipe'.$sql);
+$search = $bdd->prepare('SELECT * FROM lbb_recipe LEFT JOIN lbb_users ON lbb_recipe.username_author=lbb_users.username'.$sql);
 
 if(!empty($sql)){
 	$search->bindValue(':search', '%'.$get['search'].'%');
@@ -120,7 +120,7 @@ else {
 					<tr>
 						<td><?= ucfirst($value['title']);?></td>
 						<td><?=$value['date_publish'];?></td>
-						<td><?= ucfirst($value['username_author']);?></td>
+						<td><?= ucfirst($value['firstname']).' '.$value['lastname'];?></td>
 						<td>
 							<a href="edit_recipe.php?id=<?=$value['id'];?>"> 
 							<i class="fa fa-pencil"></i> Modifier</a>
