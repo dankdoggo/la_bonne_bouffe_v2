@@ -6,7 +6,7 @@ require_once 'inc/functions.php';
 $get =[];
 $sql='';
 
-/*PAGINATION DE RESULTAT */
+/*PAGINATION DE RESULTAT */ //PAS FINI
 $itemsPerPage = 3; // nombre de résultats par page
 
 
