@@ -11,7 +11,7 @@
 	  	</a>
 	  	</div>
 
-		<div class="center-block"><img src="img/logo.png"></div>
+		<div class="center-block"> <a href="contact.php"><img src="img/logo.png"></a></div>
 
 		<div>
 			<a href="contact.php">
