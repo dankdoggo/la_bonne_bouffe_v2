@@ -27,10 +27,10 @@ if(!empty($_POST)){
 	if(empty($post['lastname']) || !minAndMaxLength($post['lastname'], 2, 20)){
 		$errors[] = 'Le Prénom doit contenir entre 2 et 20 caractères';
 	}
-	if(empty($post['password']) || !minAndMaxLength($post['password'], 8, 20)){
-		$errors[] = 'Le Mot de passe doit contenir entre 8 et 20 caractères';
+	if(!((bool)preg_match('#[A-Za-z0-9]{8,20}#', $post['password']))){
+		$errors[] = 'Le Mot de passe doit contenir entre 8 et 20 caractères (Pas de caractères spéciaux)';
 	}
-	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
+	if(!(bool)preg_match('#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#', $post['Email-take'])){
 		$errors[] = 'Veuillez entrer une adresse mail valide';
 	}
 	if(emailExist($post['email'], $bdd)){

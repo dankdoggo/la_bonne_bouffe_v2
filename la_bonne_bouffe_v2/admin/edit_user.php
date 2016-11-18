@@ -28,8 +28,8 @@ if(!empty($_POST)){
 
 	if(!empty($post['password'])){
 		$updatePassword = true;
-		if(!minAndMaxLength($post['password'], 8, 20)){
-			$errors[] = 'Votre mot de passe doit comporter entre 8 et 20 caractères';
+		if(!((bool)preg_match('#[A-Za-z0-9]{8,20}#', $post['password']))){
+			$errors[] = 'Votre mot de passe doit comporter entre 8 et 20 caractères (Pas de caractères spéciaux)';
 		}
 	}
 
