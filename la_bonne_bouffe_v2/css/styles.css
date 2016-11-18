@@ -1,0 +1,434 @@
+@charset"utf-8";
+
+/*GENERALITES*****************************/
+
+body{
+	font-size:16px;
+	font-family: 'Josefin Sans', sans-serif;
+	color: black;
+	margin:0 auto;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.wrapper {
+	max-width: 100%;
+	width: 75em;
+	margin: 0 auto;
+	background-color: #EBEBE8;
+}
+
+/*********HEADER*************************/
+
+#header{
+	height: 7em;
+	background-color: #505050;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 0.8em;
+}
+
+.titre-contact{
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #EBEBE8;
+	font-size: 1.5em;
+}
+
+.info-contact{
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #EBEBE8;
+	font-size: 1em;
+	font-style: italic;
+}
+
+.bloc-contact{
+	padding-left: 2em;
+	line-height: 2.1em;
+}
+
+
+.nous-contacter{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.5em;
+	color: #EBEBE8;
+	line-height: 3em;
+	padding-right: 2em;
+}
+
+/*********FOOTER*************************/
+
+#footer {
+	background-color: #505050;
+	color: #EBEBE8;
+	font-size: 1em;
+	padding: 0.4em;
+}
+
+.peace {
+	color: #A9414C;
+}
+
+#footer a {
+	color: #A9414C;
+}
+
+#footer a:hover {
+	color: white;
+}
+
+.mentions-footer {
+	padding-top: 2em;
+}
+
+
+/*******TITRES index.php***********/
+
+.home{
+	margin: 0;
+	color: #A9414C;
+}
+
+.h1-home{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-style: italic;
+	font-size: 1.8em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+.h2-home{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.2em;
+}
+
+/*******Section slider de index.php*****/
+
+
+#section-slider{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-top: 2em;
+}
+
+.bloc-slider{
+	height: 23.5em !important;
+	width: 40em !important;
+	overflow: hidden !important;
+	text-align: center !important;
+	position: relative;
+}
+
+.img-slider{
+	max-height: 100%;
+	display: block;
+	text-align: center;
+	margin: auto;
+	position: absolute;
+	left: 6%;
+}
+
+/*******Section recipe de index.php*****/
+
+
+.text-recipe{
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 1.2em;
+	font-style: italic;
+	color: #90837B;
+	margin-bottom: 2.5em;
+}
+
+
+.wrapper-recipe{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+
+
+/*******Section list recipe de index.php*****/
+
+
+.link-recipe{
+	height:4em;
+	line-height: 4em;
+	width: 25%;
+	background-color: #A9414C;
+	border: 0.0625em, solid;
+	border-radius: 0.1875em;
+	text-align: center;
+	color: white;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1em;
+	font-style: italic;
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
+
+#link-recipe-style:hover {
+	text-decoration: none;
+}
+
+.bloc-recipe{
+	display: flex;
+	flex-direction: column;
+}
+
+
+.bloc-recipe-first{
+	height: 14.6875em !important;
+	width: 14.6875em !important;
+	overflow: hidden !important;
+	text-align: center !important;
+	border: 0.0625em, solid;
+	border-radius: 0.25em;
+}
+
+.bloc-recipe-second{
+	height: 100% !important;
+	width: 100% !important;
+	overflow: hidden !important;
+	position: relative;
+}
+
+.img-recipe{
+	max-height: 100%;
+	display: block;
+	text-align: center;
+	margin: auto;
+	position: absolute;
+	left: -32%;
+}
+
+
+/**********Style section-list-recipe of list_recipe.php**********/
+
+#section-list-recipe {
+	background-color: #EBEBE8;
+}
+
+.title-section-list {
+	margin: 0 auto;
+	padding: 1em 0;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: #A9414C;
+	font-size: 1.8em;
+}
+
+/*style img and text*/
+
+.contain-img-list-recipe {
+	height: 14.6875em;
+	width: 14.6875em;
+	overflow: hidden;
+	position: relative;	
+}
+
+.img-list-recipe {
+	position: absolute;
+	left: -29%;
+	max-height: 100%;
+}
+
+.contain-img-text-list-recipe {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 1em 0 2em 0;
+}
+
+.title-list-recipe {
+	font-size: 1.2em;
+	padding: 0.5em 0;
+	color: #A9414C;
+}
+
+
+/*style de la barre recherche*/
+
+.contain-search-recipe {
+	text-align: center;
+}
+
+
+/**********style of view_recipe.php*************/
+
+
+#section-view-recipe {
+	padding-left: 2em;
+	background-color: #EBEBE8;
+}
+
+.title-ingredient-preparation {
+	color: #A9414C;
+	font-size: 1.4em;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+.date-author-recipe {
+	color: #A9414C;
+	margin: 0;
+	padding-bottom: 0.625em;
+}
+
+
+/*********style of FORMULAIRE of contact.php*************************/
+
+.wrapper-form{
+	width: 50%;
+	margin:0 auto;
+}
+
+.contact{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+}
+
+.h1-contact{
+	margin: 0;
+	color: #A9414C;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1.8em;
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+.text-contact{
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 1.2em;
+	font-style: italic;
+	color: #90837B;
+	margin-bottom: 2.5em;
+}
+
+
+.label-contact{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1em;
+	color: #A9414C;
+	margin-bottom: 1em;
+	margin-right: 0.5em;
+}
+
+.input-contact{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 1em;
+	width: 37.5em;
+	color: #90837B;
+	border: 0;
+	border-radius: 0.25em;
+	margin-bottom: 1em;
+	padding: 0.3125em;
+}
+
+.textarea-contact{
+	height: 9.375em;
+	padding: 0.3125em;
+}
+
+
+.boutton-contact{
+	width: 6.25em;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 1.2em;
+	color:white;
+	background-color: #A9414C;
+	border: 0;
+	border-radius: 0.25em;
+}
+
+/*HEADER BACK OFFICE********************************************/
+
+.wrapper-header-back{
+	max-width: 100%;
+	height: 3.75em;
+	line-height: 3.75em;
+	background-color: #EBEBE8;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+#logo{
+	padding-left: 2em;
+}
+
+.menu-header-back{
+	padding-right:2em;
+	margin-top:0;
+	margin-bottom: 0;
+}
+
+.menu-header-back ul{
+	text-align: center;
+	list-style: none;
+	margin-top:0;
+	margin-bottom: 0;
+}
+
+.menu-header-back li{
+	display: inline-block;
+	vertical-align: middle;
+	cursor: pointer;
+	list-style: none;
+	padding-left: 1.5em;
+	padding-right: 1.5em;
+	font-family: 'Source Sans Pro', sans-serif;
+}
+
+a{
+	color: #505050;
+	list-style: none;
+	text-decoration: none;
+}
+
+
+.menu-header-back a:hover{
+	color: white;
+	list-style: none;
+	text-decoration: none;
+}
+
+
+
+.menu-header-back li:hover {
+	list-style: none;
+	text-decoration: none;
+	background-color: #A9414C;
+}
+
+.menu-header-back li:active {
+	list-style: none;
+	text-decoration: none;
+	background-color: #A9414C;
+}
+
+/*LA 404 QUE TU VEUX METTRE SUR TA CASSETTE***********/
+.error_404{
+	position: relative;
+	background-image: url(../img/background.gif);
+	background-repeat:no-repeat;
+	background-size: cover;
+	height:38em;
+	width:100%;
+}
+
+.error_message{
+	color:white;
+	font-size:3em;
+	margin:4em 5em;
+	padding:0.2em;
+	position:absolute;
+	text-align: center;
+	background-color:rgba(0,0,0,0.2);
+	border-radius: 3px;
+}
