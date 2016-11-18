@@ -121,7 +121,13 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 		} ?>
 		<?php include 'header.php'; ?>
 
-		<?php if(count($errors) > 0): ?>
+		<main class="container">
+
+		 	<div class="col-sm-6 col-sm-push-3">
+
+				<h1 class="text-center text-info">Modifier un compte utlisateur</h1>
+
+				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
 						<?=implode('<br>', $errors);?>
 					</div>
@@ -133,13 +139,8 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 					</div>
 				<?php endif; ?>
 
-		<main>
 
-		 	<div class="col-sm-6 col-sm-push-3">
-
-				<h1 text-center text-info>Modifier un compte utlisateur</h1>
-
-				<form method="post" enctype="multipart/form-data">
+				<form method="post" class="form-horizontal" enctype="multipart/form-data">
 					
 					
 					
@@ -163,7 +164,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 					<input type="file" name="avatar" id="avatar" class="input-file" accept="image/*">
 
 					<br><br>
-					<input type="submit" value="editer les informations" class="btn btn-primary">
+					<input type="submit" value="Modifier les informations" class="btn btn-info btn-block">
 
 				</form>
 

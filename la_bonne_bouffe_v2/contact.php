@@ -15,16 +15,49 @@ if (!empty($_POST)) {
 		$post[$key] = trim(strip_tags($value));
 	} // fermeture de mon nettoyage de $POST
 
-	if (empty($post['FirstName-take']) || !minAndMaxLength($post['FirstName-take'], 3, 30 )){
-		$errors [] = 'Merci d\'indiquer un prénom entre  trois  et trente caractères';
+	/*
+		Ancienne condition: 
+
+		if (empty($post['FirstName-take']) || !minAndMaxLength($post['FirstName-take'], 3, 30 )){
+			$errors [] = 'Merci d\'indiquer un prénom entre  trois  et trente caractères';
+		} LastName-take
+
+	*/
+
+	if(!empty($post['FirstName-take'])){ //Si le champ prénom n'est pas vide alors on vérifie qu'il commence bien en majuscule
+
+		if(!((bool)preg_match('#^[A-Z]+[a-z]#', $post['FirstName-take']))){ 
+				$errors[] = 'Le prénom doit commencer par une majuscule';
+			}
+	}else{
+		$errors[] = 'Merci d\'indiquer votre prénom';
 	}
 
-	if (empty($post['LastName-take']) || !minAndMaxLength($post['LastName-take'], 3, 30 )){
-		$errors [] = 'Merci d\'indiquer un nom entre trois et trente caractères';
+	if(!empty($post['LastName-take'])){ //Si le champ nom n'est pas vide alors on vérifie qu'il commence bien en majuscule
+
+		if(!((bool)preg_match('#^[A-Z]+[a-z]#', $post['LastName-take']))){ 
+				$errors[] = 'Le nom de famille doit commencer par une majuscule';
+			}
+	}else{
+		$errors[] = 'Merci d\'indiquer votre nom de famille';
 	}
+
+	/*
+
+	Ancienne condition pour le mail 
 
 	if(!filter_var(($post['Email-take']),FILTER_VALIDATE_EMAIL)){
 		$errors [] = 'Votre adresse email n\'est pas correcte';
+	}
+
+	*/
+
+	if(!empty($post['Email-take'])){
+		if(!(bool)preg_match('#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#', $post['Email-take'])){ //On vérifie que le mail soumis ne respecte le pattern défini dans preg_match pour définir une erreur
+			$errors [] = 'Votre adresse email n\'est pas correcte';
+		}
+	}else{
+		$errors[] = 'Merci d\'indiquer votre adresse email';
 	}
 
 	if (empty($post['Message-take']) || !minAndMaxLength($post['Message-take'], 3, 1000 )){
@@ -118,7 +151,7 @@ if (!empty($_POST)) {
 					<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
 					<?php
 					if($hasError === true){
-					echo '<div class="alert alert-danger">'.implode(' - ', $errors). '</div>';
+					echo '<div class="alert alert-danger">'.implode(' <br> ', $errors). '</div>';
 					}
 					if($formValid === true){
 					echo '<div class= "alert alert-success"> Votre message a bien été envoyé. Nous y répondrons dans les plus brefs délais</div>';
