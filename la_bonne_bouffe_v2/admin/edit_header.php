@@ -14,7 +14,7 @@ $errors = [];
 $post = [];
 $files = [];
 $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
-$dirUpload = '../uploads_slider/';
+$dirUpload = '../uploads/uploads_slider/';
 $nbSliders;
 $updateValid;
 
@@ -225,7 +225,7 @@ if($checkImg->execute()) {
 								<?php foreach ($sliders as $slider) :?>
 
 								<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 contain-img-slider-back">
-									<img class="img-slider-back" src="<?=$dirUpload.$slider['value'];?>">
+									<img class="img-slider-back" src="<?=$slider['value'];?>">
 								</div>
 												
 								<?php endforeach; ?>
