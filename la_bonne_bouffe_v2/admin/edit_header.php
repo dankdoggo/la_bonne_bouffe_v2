@@ -12,93 +12,73 @@ require_once '../inc/functions.php';
 
 $errors = [];
 $post = [];
+$files = [];
 $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 $dirUpload = '../uploads_slider';
+$nbSliders;
+$updateValid;
 
-if(!empty($_POST)) { // tant que les champs ne sont pas vides on effectue pas les vérif
-
-	foreach ($_POST as $key => $value) { // on nettoie les données avant toute vérification et les donnes des DEUX formulaires
-        $post[$key] = trim(strip_tags($value));
-    }
+if(!empty($_FILES)) { // tant que les champs ne sont pas vides on effectue pas les vérif donc si l'admin ne change pas ça sera pas pris en compte
 
 	if ($_POST['action'] === 'formulaire_1') { // si on est dans le formulaire 1 alors on va faire les vérif qui lui correspondent
+	
+		foreach ($_FILES['slider']['error'] as $key => $error) {
 
-		 // Vérification upload of slider1 (l'admin n'est pas obligé de télécharger les 3 photos en même temps)
-	    if(is_uploaded_file($_FILES['slider1']['tmp_name']) || file_exists($_FILES['slider1']['tmp_name'])) {
-	     	
-	     	// vérification de l'upload et insertion de la photo pour slider 1
-	        $finfo = new finfo(); 
-	        $mimeType = $finfo->file($_FILES['slider1']['tmp_name'], FILEINFO_MIME_TYPE);
-	        
-	        if(in_array($mimeType, $mimeTypeAllow)) { // la variable $mimeTypeAllow est au dessus
-	            $pictureName = uniqid('picture_');
-	            $pictureName.= '.'.pathinfo($_FILES['slider1']['name'], PATHINFO_EXTENSION); // on stocke dans une var $pictureName unidid un point et les informations sur l'extension
+			$finfo = new finfo(); // fonction qui permet de retourner les informations sur un fichier
+        	$mimeType = $finfo->file($_FILES['slider']['tmp_name'][$key], FILEINFO_MIME_TYPE);
+        
+	        if(in_array($mimeType, $mimeTypeAllow)) { // si l'extension qu'on a lu dans le tmp_name est présente dans le tableau qui stocke le type d'extension autorisée alors on va lui attribuer un ID qui met la date de l'upload et autre chose aussi
+	            $pictureName = uniqid('slide_');
+	            $pictureName.= '.'.pathinfo($_FILES['slider']['name'][$key], PATHINFO_EXTENSION); // on stocke dans une var $pictureName unidid un point et les informations sur l'extension
 
-	            if(!is_dir($dirUpload)){ // is_dir vérifie si le dossier existe dans l'arborescence des dossiers
+	            if(!is_dir($dirUpload)) { // is_dir vérifie si le dossier existe dans l'arborescence des dossiers
 	                mkdir($dirUpload, 0755); // s'il n'y a pas de dossier existant avec al fonction mk_dir on le crée, 0755 correspond aux droits d'utilisateur
 	            }
+			
+				// ici $_FILES nous indique qu'il y a aucune erreur donc on peut faire l'insertion	
+				if ($error == UPLOAD_ERR_OK) { // Si tout est ok
+					$tmp_name = $_FILES['slider']['tmp_name'][$key];
 
-	            if(!move_uploaded_file($_FILES['slider1']['tmp_name'], $dirUpload.$pictureName)){ //move uploaded file permet permet de télécharger le fichier
-	                $errors[] = 'Erreur lors de l\'envoi de image 1';
-	            }
-	        }
-	        else {
-	            $errors[] = 'Le type de fichier de image 1 est invalide. Uniquement jpg/jpeg/gif/png.'; 
-	        }
-		}
+					if(move_uploaded_file($tmp_name, $dirUpload.$pictureName)) {
+						$update = $bdd->prepare('UPDATE lbb_edit_home SET value = :nomImage WHERE data = "slide'.$key.'"');
+						$update->bindValue(':nomImage', $dirUpload.$pictureName);
+						
+						if($update->execute()){
+							$updateValid = true;
+						}
+						else {
+							var_dump($update->errorInfo());
+						}
+					}
+					else {
+						$errors[] = 'Erreur lors du téléchargement de votre image';
+					}
+				} // end of upload erro ook
 
-		// Vérification upload of slider2 (l'admin n'est pas obligé de télécharger les 3 photos en même temps)
-	    if(is_uploaded_file($_FILES['slider2']['tmp_name']) || file_exists($_FILES['slider2']['tmp_name'])) {
-	     	
-	     	// vérification de l'upload et insertion de la photo pour slider 1
-	        $finfo = new finfo(); 
-	        $mimeType = $finfo->file($_FILES['slider2']['tmp_name'], FILEINFO_MIME_TYPE);
-	        
-	        if(in_array($mimeType, $mimeTypeAllow)) { // la variable $mimeTypeAllow est au dessus
-	            $pictureName = uniqid('picture_');
-	            $pictureName.= '.'.pathinfo($_FILES['slider2']['name'], PATHINFO_EXTENSION); // on stocke dans une var $pictureName unidid un point et les informations sur l'extension
+			} // end of in an array
+			else {
+				$errors[] = 'Le type de fichier est invalide. Uniquement jpg/jpeg/gif/png'; 
+			}
 
-	            if(!is_dir($dirUpload)){ // is_dir vérifie si le dossier existe dans l'arborescence des dossiers
-	                mkdir($dirUpload, 0755); // s'il n'y a pas de dossier existant avec al fonction mk_dir on le crée, 0755 correspond aux droits d'utilisateur
-	            }
+		}// end of foreach file
 
-	            if(!move_uploaded_file($_FILES['slider2']['tmp_name'], $dirUpload.$pictureName)){ //move uploaded file permet permet de télécharger le fichier
-	                $errors[] = 'Erreur lors de l\'envoi de image 2';
-	            }
-	        }
-	        else {
-	            $errors[] = 'Le type de fichier de image 2 est invalide. Uniquement jpg/jpeg/gif/png.'; 
-	        }
-		}
+	} // end of si on est dans le form 1  
+ 
+} // end of si $_FILES est vide ou pas, on fera pas les vérif
 
-		// Vérification upload of slider2 (l'admin n'est pas obligé de télécharger les 3 photos en même temps)
-	    if(is_uploaded_file($_FILES['slider3']['tmp_name']) || file_exists($_FILES['slider3']['tmp_name'])) {
-	     	
-	     	// vérification de l'upload et insertion de la photo pour slider 1
-	        $finfo = new finfo(); 
-	        $mimeType = $finfo->file($_FILES['slider3']['tmp_name'], FILEINFO_MIME_TYPE);
-	        
-	        if(in_array($mimeType, $mimeTypeAllow)) { // la variable $mimeTypeAllow est au dessus
-	            $pictureName = uniqid('picture_');
-	            $pictureName.= '.'.pathinfo($_FILES['slider3']['name'], PATHINFO_EXTENSION); // on stocke dans une var $pictureName unidid un point et les informations sur l'extension
+if(!empty($_POST)) { 
 
-	            if(!is_dir($dirUpload)){ // is_dir vérifie si le dossier existe dans l'arborescence des dossiers
-	                mkdir($dirUpload, 0755); // s'il n'y a pas de dossier existant avec al fonction mk_dir on le crée, 0755 correspond aux droits d'utilisateur
-	            }
-
-	            if(!move_uploaded_file($_FILES['slider3']['tmp_name'], $dirUpload.$pictureName)){ //move uploaded file permet permet de télécharger le fichier
-	                $errors[] = 'Erreur lors de l\'envoi de image 3';
-	            }
-	        }
-	        else {
-	            $errors[] = 'Le type de fichier de image 3 est invalide. Uniquement jpg/jpeg/gif/png.'; 
-	        }
-		}
-	} // end of check form 1
-
-	elseif ($_POST['action'] === 'formulaire_2') { // si on est dans le formulaire 2 on lui fait les vérfi qui lui correspondent
+	if ($_POST['action'] === 'formulaire_2') { // si on est dans le formulaire 2 on lui fait les vérfi qui lui correspondent
 		
-		if(!minAndMaxLength($post['adress'], 4, 50)) {
+		foreach ($_POST as $key => $value) { // on nettoie les données avant toute vérification 
+	        $post[$key] = trim(strip_tags($value));
+	    }
+
+	    if(!minAndMaxLength($post['name-resto'], 4, 50)) {
+    		$errors[] = 'Le nom du restaurant doit comporter entre 4 et 50 caractères';
+    	}
+
+		if(!minAndMaxLength($post['address'], 4, 50)) {
     		$errors[] = 'L\'adresse doit comporter entre 4 et 50 caractères';
     	}
 
@@ -114,21 +94,40 @@ if(!empty($_POST)) { // tant que les champs ne sont pas vides on effectue pas le
 	    	$errors[] = 'Le numéro de téléphone doit comporter 10 chiffres';
 	    }
 
+	    if(isset($errors) && count($errors) === 0) {
+
+		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "name-resto"');
+		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "address"');
+		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "zipcode"');
+		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "city"');
+		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "phone"');
+			$update->bindValue(':value', $post['name-resto']);
+			$update->bindValue(':value', $post['address']);
+			$update->bindValue(':value', $post['zipcode']);
+			$update->bindValue(':value', $post['city']);
+			$update->bindValue(':value', $post['phone']);
+						
+			if($update->execute()){
+				$updateValid = true;
+			}
+			else {
+			var_dump($update->errorInfo());
+			}
+
+		} // end of isset et count $erros
+
 	} // end of check form 2 
 
-	if(isset($errors) && count($errors) === 0) {
-		// s'il n'y a pas d'erreurs on  peut faire les requêtes sql 
-		// pour efficacité on fait 1 SEULE requete SQL pour les deux formulaires car chaque requete 
-		// on fait une requête UPDATE car les données existent déjà dans la table (id, data,value), même si les lignes sont vides, cela évite de faire une requête INSERT si table vide et une requête UPDATE s'il y a déjà des images
+}  // end of !empty $_POST
 
-		$update = $bdd->prepare('UPDATE lbb_edit_home SET value WHERE data = "slide%"');
-		$update->bindValue(':slide1', $post['slider1']);
+	
+$checkImg = $bdd->prepare('SELECT value FROM lbb_edit_home WHERE data LIKE "slide%"'); 
 
-		
-	}
-
-} // end of if !empty $_POST
-
+if($checkImg->execute()) {
+    $sliders = $checkImg->fetchAll(PDO::FETCH_ASSOC);
+    $nbSliders = count($sliders);
+    $videSliders = empty($sliders);
+}
 
 
 	
@@ -162,6 +161,20 @@ if(!empty($_POST)) { // tant que les champs ne sont pas vides on effectue pas le
 	
 <h1 class="text-center text-info"> Editer le slider et les coordonnées</h1>
 
+<?php if(count($errors) > 0) : ?>
+
+    <div class="alert alert-danger">
+         <?php echo implode('<br>', $errors); ?>
+    </div>
+
+<?php elseif(isset($updateValid) && $updateValid == true) :?>    
+     
+     <div>
+     	<p class="alert alert-success">Vos mises à jour ont bien été prises en compte</p>
+     </div>       
+
+<?php endif; ?>
+
 <br>
 	<div class="container">
 
@@ -172,33 +185,23 @@ if(!empty($_POST)) { // tant que les champs ne sont pas vides on effectue pas le
 			<h2 style="font-size: 1.4em;">Edition des images défilantes de l'accueil</h2>
 
 			<br>
-				<!-- ici des conditions php pour l'affichage des images ou pas -->
-				<?php if(count($errors) > 0) : ?>
-
-                        <div class="alert alert-danger">
-                             <?php echo implode('<br>', $errors); ?>
-                        </div>
-                                              
-                <?php endif; ?>
-
+				
 				<form method="post" enctype="multipart/form-data">
 
 					<input type="hidden" name="action" value="formulaire_1">
 
-					<label for="slider1">Image 1</label><br>
-					<input type="file" name="slider1" id="slider1">
-
+					<?php 
+					for($i=1;$i<=$nbSliders;$i++):?>
+					<label for="slider[<?=$i;?>]">Image <?=$i;?></label>
+					<input type="file" name="slider[<?=$i;?>]">
 					<br>
-					<label for="slider2">Image 2</label><br>
-					<input type="file" name="slider2" id="slider2">
 
-					<br>
-					<label for="slider3">Image 3</label><br>
-					<input type="file" name="slider3" id="slider3">
+					<?php endfor; ?>
 
 					<br>
 					<p class="text-left text-danger small">Veuillez uploader des images ne dépassant pas 250px </p>
 					<input type="submit" value="Ajouter des images" class="btn btn-primary">
+
 				</form>
 
 			</div>
@@ -210,38 +213,29 @@ if(!empty($_POST)) { // tant que les champs ne sont pas vides on effectue pas le
 				<br>
 				<br>
 
+        		<?php if($videSliders === true):?>
+        			<div>
+						<p class="text-center alert alert-danger">Vous n'avez pas encore téléchargé d'images </p>
+					</div>
+
+				<?php elseif ($nbSliders != 0): ?>
+
+							<div>
+								<?php foreach ($sliders as $slider) :?>
+									<img class="" src="<?=$dirUpload?>/<?=$slider['value'];?>">
+								
+												
+								<?php endforeach; ?>
 
 
-        		<?php 
-        			$checkImg = $bdd->prepare('SELECT value FROM lbb_edit_home WHERE data LIKE "slide%"'); 
-                    if($checkImg->execute()):
-                        $sliders = $checkImg->fetchAll(PDO::FETCH_ASSOC);
-                        $nbSliders = empty($sliders);
-                       // $nbSliders = count($sliders);
 
-        			    if($nbSliders === false): 
-                ?>
-        					<div>
-								<p class="text-center alert alert-danger">Vous n'avez pas encore téléchargé d'images </p>
+
+
+								<p class="text-center alert alert-danger">dddddddaaa </p>
 							</div>
-        				
-                        <?php else : ?>
 
-                            <div>
-                                <img src="">
-                            </div>
 
-                            <div>
-                                <img src="">
-                            </div>
-
-                            <div>
-                                <img src="">
-                            </div>
-
-        				<?php endif; ?> 
-
-        			<?php endif; ?>
+        		<?php endif; ?>
 
 			</div>
 
