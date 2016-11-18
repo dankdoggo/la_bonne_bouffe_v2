@@ -60,12 +60,12 @@ if(!empty($_POST)){
 
 		
 	if (count($errors) === 0)  {
-		$add=$bdd->prepare('INSERT INTO lbb_recipe (title, content, picture, date_publish, author) VALUES ( :title, :content, :picture, NOW(), :author)');
+		$add=$bdd->prepare('INSERT INTO lbb_recipe (title, content, picture, date_publish, username_author) VALUES ( :title, :content, :picture, NOW(), :username_author)');
 
 		$add->bindValue(':title',$post['title-take']);
 		$add->bindValue(':content',$post['content-take']);
 		$add->bindValue(':picture', $dirUpload.$photoName);
-		$add->bindValue(':author', $_SESSION['id']);
+		$add->bindValue(':username_author', $_SESSION['username']);
 
 		if($add->execute()){
 			$formValid = true;
