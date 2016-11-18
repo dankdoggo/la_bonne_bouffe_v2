@@ -18,6 +18,9 @@ if(!empty($_POST)){
 	if(usernameExist($post['username'], $bdd)){
 		$errors[] = 'Votre Pseudo est déja utilisé';
 	}
+	if(empty($post['permission'])){
+		$errors[] = 'Veuillez sélectionner une élévation';
+	}
 	if(empty($post['firstname']) || !minAndMaxLength($post['firstname'], 2, 20)){
 		$errors[] = 'Le Nom doit contenir entre 2 et 20 caractères';
 	}
@@ -60,9 +63,10 @@ if(!empty($_POST)){
 	}
 
 	if(count($errors) === 0){
-		$insert = $bdd->prepare('INSERT INTO lbb_users(username, firstname, lastname, email, password, avatar) VALUES(:username, :firstname, :lastname, :email, :password, :avatar)');
+		$insert = $bdd->prepare('INSERT INTO lbb_users(username, permission, firstname, lastname, email, password, avatar) VALUES(:username, :permission, :firstname, :lastname, :email, :password, :avatar)');
 
 		$insert->bindValue(':username', $post['username']);
+		$insert->bindValue(':permission', $post['permission']);
 		$insert->bindValue(':firstname', $post['firstname']);
 		$insert->bindValue(':lastname', $post['lastname']);
 		$insert->bindValue(':email', $post['email']);
@@ -123,8 +127,17 @@ if(!empty($_POST)){
 					<label for="username">Pseudo</label>
 					<input type="text" name="username" id="username" placeholder="" class="form-control">
 
+					<br><br>
 					<label for="permission">&Eacute;lévation</label>
-					<select ></select>
+					<select class="form-control" name="permission">
+						<option value="" selected disabled>-- Sélectionner--</option>
+						<option value="1">&Eacute;diteur&nbsp;&nbsp; #Préposéauxpatates</option>
+						<option value="2">Administrateur&nbsp;&nbsp; #GordonRamsay</option>
+
+
+
+
+					</select>
 
 
 					<br><br>

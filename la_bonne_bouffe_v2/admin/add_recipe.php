@@ -22,15 +22,17 @@ if(!empty($_POST)){
 		$post[$key] = trim(strip_tags($value));
 	}
 
-	if(empty($post['title-take']) || !minAndMaxLength($post['title-take'], 5, 140)){
+	//Vérif avec preg_match (minimum 5 caractères, max 140)
+	if(!((bool)preg_match('#[A-Za-z]{5,140}#', $post['title-take']))){
 			$errors[] = 'Merci d\'indiquer un titre de recette entre cinq et cent quarante caractères';
 	}
 
+	//Vérif classique avec une fonction
 	if(empty($post['ingredient-take']) || !minAndMaxLength($post['ingredient-take'], 20, 1000)){
 			$errors[] = 'Merci d\'indiquer une liste d\'ingredients d\'au moins 20 caractères';
 	}
 
-	if(empty($post['content-take']) || !minAndMaxLength($post['content-take'], 20, 1000)){
+	if(!((bool)preg_match('#[A-Za-z0-9]{20,}#', $post['content-take']))){
 			$errors[] = 'Merci d\'indiquer une présentation de recette d\'au moins 20 caractères';
 	}
 
@@ -118,7 +120,7 @@ if(!empty($_POST)){
 				<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
 				<?php
 				if($hasError === true){
-					echo '<div class="alert alert-danger">'.implode(' - ', $errors). '</div>';
+					echo '<div class="alert alert-danger">'.implode(' <br> ', $errors). '</div>';
 				}
 				if($formValid === true){
 					echo '<div class= "alert alert-success"> Bravo votre recette est bien enregistrée</div>';
