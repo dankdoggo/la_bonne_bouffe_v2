@@ -104,7 +104,7 @@ if(!empty($_POST)){
 
 		 	<div class="col-sm-6 col-sm-push-3">
 
-				<h1 class="text-center text-info">Ajout d'un utlisateur</h1>
+				<h1 class="text-center text-info">Ajout d'un utilisateur</h1>
 
 				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
@@ -113,7 +113,7 @@ if(!empty($_POST)){
 		
 				<?php elseif(isset($success) && $success == true): ?>
 
-					<div class="alert alert-success">
+					<div  class="alert alert-success">
 						Votre inscription a bien été prise en compte
 					</div>
 				<?php endif; ?>
@@ -122,6 +122,10 @@ if(!empty($_POST)){
 					
 					<label for="username">Pseudo</label>
 					<input type="text" name="username" id="username" placeholder="" class="form-control">
+
+					<label for="permission">&Eacute;lévation</label>
+					<select ></select>
+
 
 					<br><br>
 					<label for="lastname">Nom</label>
