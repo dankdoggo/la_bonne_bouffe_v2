@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(empty($_SESSION)){
+	header('Location: index.php');
+}
+
 require_once '../inc/connect.php'; 
 require_once '../inc/functions.php';
 
@@ -10,6 +14,8 @@ $post = [];
 $formValid = false;
 $hasError = false;
 $dirUpload = 'upload/';
+$updatePicture = false;
+
 
 
 if(!empty($_POST)){
@@ -26,50 +32,92 @@ if(!empty($_POST)){
 			$errors[] = 'Merci d\'indiquer une présentation de recette d\'au moins 25 caractères';
 	}
 
-	if(!is_uploaded_file($_FILES['picture-take']['tmp_name']) || !file_exists($_FILES['picture-take']['tmp_name'])){ // ici on sécurise en doublant l'info: uploadé et existant
-			$errors[] = 'Merci de télécharger une photo de présentation de la recette';
-	}
-
-	else{ // si fichier a été envoyé et est existant
+	if(is_uploaded_file($_FILES['picture-take']['tmp_name']) || file_exists($_FILES['picture-take']['tmp_name'])){ // ici on sécurise en doublant l'info: uploadé et existant
 		$finfo = new finfo(); //on crée une variable $finfo pour utiliser l'outils qui permet de récupérer le mimetype
 		$mimetype = $finfo->file($_FILES['picture-take']['tmp_name'], FILEINFO_MIME_TYPE); //on créee une varaible mimetype pour vérifier le mimetype du fichier (les extensions du fichier)
 		$mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];// on crée une variable array pour lister l'ensemble des types d'extension autorisés
 
-		if(in_array($mimetype, $mimeTypeAllow)){ // si dans le tableau mimeTypeAllow la variable $mimetype existe
+		if (in_array($mimetype, $mimeTypeAllow)){ // si dans le tableau mimeTypeAllow la variable $mimetype existe
 
 			$photoName = uniqid('photo_recette_'); // on crée une variable pour renommer le fichier avec un ID unique : uniqid ('avec extension photo_produit_ avant')
 			$photoName.= '.' .pathinfo($_FILES['picture-take']['name'], PATHINFO_EXTENSION); // on rajoute au nom du fichier son extension. (pathinfo: chemin système -PATHINFO_EXTENSION est une méthode qui permet de récupérer l'extension du fichier)
 
-			if(!is_dir($dirUpload)){// si le dossier upload de la varibale$dirUpload (créee en haut) n'existe pas (c'est le dossier dans lequel on range les fichiers uploadés car sinon un fichier uploadé à une existance de vie de 30')
-				mkdir($dirUpload, 0755); // on crée le dossier (mkdir= créer un dossier)
-			}
+				if(!is_dir($dirUpload)){// si le dossier upload de la varibale$dirUpload (créee en haut) n'existe pas (c'est le dossier dans lequel on range les fichiers uploadés car sinon un fichier uploadé à une existance de vie de 30')
+					mkdir($dirUpload, 0755); // on crée le dossier (mkdir= créer un dossier)
+				}
 
-			if(!move_uploaded_file($_FILES['picture-take']['tmp_name'], $dirUpload.$photoName)){//Si le fichier uploadé n'a pas été rangé dans le dossier upload(concaténé) avec son nouveau nom
-				$errors[]= 'Votre photo de présentation de la recette n\'a pas pu être uploadée';  
-			}
+				if(!move_uploaded_file($_FILES['picture-take']['tmp_name'], $dirUpload.$photoName)){//Si le fichier uploadé n'a pas été rangé dans le dossier upload(concaténé) avec son nouveau nom
+					$errors[]= 'Votre photo de présentation de la recette n\'a pas pu être uploadée';  
+				}
 		}
+
 		else{ // sinon(si dans le tableau $mimeTypeAllow la variable $mimetype) soit n'existe pas
-			$errors[]= 'Votre photo de présentation de la recette n\'est pas valide';
+			$errors[]= 'Votre photo de présentation de recette n\'est pas valide';
 		}
 
-	}//fermeture else (si le fichier envoyé est existant)
+		$updatePicture = true;
+	}
 
 	if (count($errors) === 0) {
-		$upd=$bdd->prepare('UPDATE SET WHERE ');
+
+		$columSQL = 'title = :Newtitle, content = :Newcontent, date_publish = NOW(), username_author = :Newauthor';
+
+		if ($updatePicture) {
+			$columSQL.= ', picture = :Newpicture';
+		}
+
+		$upd = $bdd->prepare('UPDATE lbb_recipe SET '.$columSQL.' WHERE id= :id');
+		$upd->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+		$upd->bindValue(':Newtitle', $post['title-take']);
+		$upd->bindValue (':Newcontent', $post['content-take']);
+		$upd->bindValue (':Newauthor', $_SESSION['username']);
 
 
+		if ($updatePicture) {
+			$upd->bindValue(':NewPicture', $post['picture-take']);
+		}
 
-	
+		if($upd->execute()){
+			$formValid = true;
+		}
+		else{
+			var_dump($upd->errorInfo());
+		}
+
 	} /*fermeture count error*/
 
+	else{
+		$hasError = true;
+	}
 
-
-}
-
+} //fermeture première condition ! empty
 
 
 ?>
 
+
+<!-- ICI ON PREPARE LA REQUETE POUR IDENTIFIER L'ELEMENT EN METHODE GET PAR l'ID 
+ -->
+
+<?php 
+    //On vérifie que l'id recherché existe et qu'il est de type numérique
+    if(isset($_GET['id']) && is_numeric($_GET['id'])){
+
+        //On prépare la requête SELECT
+        $select= $bdd->prepare('SELECT * FROM lbb_recipe WHERE id = :id');
+
+        //On lui indique la valeur correspondant au paramètre de la requête
+        $select->bindValue(':id', $_GET['id'], PDO::PARAM_INT); 
+ 
+        //on lui dit ici si la requete s'execute 
+        if($select->execute()){
+            //on crée une varibale $utilisateur pour récupérer les données correpondante à l'ID
+            $recipe = $select->fetch(PDO::FETCH_ASSOC);
+        }
+  
+    }
+    
+?>
 
 <!DOCTYPE html>
 
@@ -83,7 +131,7 @@ if(!empty($_POST)){
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 		<!-- My CSS -->
-       <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <link href="../css/styles.css" rel="stylesheet">
 
 	</head>
 
@@ -96,6 +144,9 @@ if(!empty($_POST)){
 
 				<h1 class="text-center">Modifier la recette</h1>
 				<hr>
+
+           		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($_SESSION['id']);?> </h3>
+
 
 				<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
 				<?php
@@ -112,18 +163,19 @@ if(!empty($_POST)){
 
 					<label class="text-center text-info">Nom de la recette:</label>
 					<br>
-					<input type="text" name="title-take" class="form-control" placeholder="Ex: Risotto de Saint Jacques et Chorizo">
+					<input type="text" name="title-take" class="form-control" placeholder="Ex: Risotto de Saint Jacques et Chorizo" value="<?=$recipe['title'];?>">
 
 					<br><br>
 
 					<label  class="text-center text-info">Description:</label>
 					<br>
-					<textarea name="content-take" class="form-control" placeholder="Ex: Pour préparer la recette du Risotto de Saint Jacques et Chorizo il vous faut : ..."></textarea>
+					<textarea name="content-take" class="form-control" placeholder="Ex: Pour préparer la recette du Risotto de Saint Jacques et Chorizo il vous faut : ..." ><?=$recipe['content'];?></textarea>
 
 					<br><br>
 							
 					<label class="text-center text-info">Photo:</label>
-					<br>
+					<img src="<?=$recipe['picture'];?>" style="width:100px;">
+					<br><br>
 					<input type="file" name="picture-take" class="btn btn-default btn-lg" accept="image/*">
 
 					<br><br>

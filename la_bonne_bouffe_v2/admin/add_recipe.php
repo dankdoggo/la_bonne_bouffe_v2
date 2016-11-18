@@ -60,12 +60,12 @@ if(!empty($_POST)){
 
 		
 	if (count($errors) === 0)  {
-		$add=$bdd->prepare('INSERT INTO lbb_recipe (title, content, picture, date_publish, username_author) VALUES ( :title, :content, :picture, NOW(), :author)');
+		$add=$bdd->prepare('INSERT INTO lbb_recipe (title, content, picture, date_publish, username_author) VALUES ( :title, :content, :picture, NOW(), :username_author)');
 
 		$add->bindValue(':title',$post['title-take']);
 		$add->bindValue(':content',$post['content-take']);
 		$add->bindValue(':picture', $dirUpload.$photoName);
-		$add->bindValue(':author', $_SESSION['username']);
+		$add->bindValue(':username_author', $_SESSION['username']);
 
 		if($add->execute()){
 			$formValid = true;
@@ -97,7 +97,7 @@ if(!empty($_POST)){
 
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- My CSS -->
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <link href="../css/styles.css" rel="stylesheet">
 	</head>
 
 	<body>
