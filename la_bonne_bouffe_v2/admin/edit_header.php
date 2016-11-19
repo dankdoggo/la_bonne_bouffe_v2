@@ -92,14 +92,16 @@ if(!empty($_POST)) {
 	    	$errors[] = 'Le nom de la ville doit comporter entre 3 et 50 caractères';
 	    }
 
-	    if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+	    //if avec preg_match pour le mail du resto #[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#
+		if(!(bool)preg_match('#[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]#', $post['email'])) {
 	    	$errors[] = 'Veuillez entrer une adresse mail valide';
 	    }
 
-	    if(!is_numeric($post['phone']) && strlen($post['phone']) != 10) {
+	    //if avec preg_match pour le numéro de téléphone
+		if(!(bool)preg_match('#[0-9]{10}#', $post['phone'])) {
 	    	$errors[] = 'Le numéro de téléphone doit comporter 10 chiffres';
 	    }
-
+	
 	    if(isset($errors) && count($errors) === 0) {
 
 	    	$columSQL = 'name-resto = :name-resto, address = :address, zipcode = :zipcode, city = :city, phone = :phone, email = :email';
