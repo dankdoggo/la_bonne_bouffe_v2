@@ -21,22 +21,6 @@ $sql='';
     	$page = 1;
     }
 
-// On réalise une requête SELECT COUNT pour savoir le nombre de recettes écrites dans la base.
-// on retourne l'ensemble des résultats dans une variable  $result
-//On crée la variable $Nbrecette pour stocker le nombre total de recette
-$count = $bdd->prepare('SELECT COUNT(*) AS total FROM lbb_recipe');
-$result = $count->fetch();
-$NbRecette = $result['total'];
-//var_dump($count);
-
-// On calcul le nombre de page à afficher pour créer les liens numérotés
-// La fonction ceil() arrondit au nombre supérieur notre division. 
-//le nombre total de page = nombre total article/ nombre d'article par page
-$nbTotalPages = ceil($NbRecette / $itemsPerPage); 
-
-// Permet de calculer la page de démarrage. 
-$startPage = ($page - 1) * $itemsPerPage;
-
 
 /*PHP module de recherche Doublé de l'affichage des pages (toutes ou celles concernées par la recherche)*/
 
