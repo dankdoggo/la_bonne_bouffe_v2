@@ -24,7 +24,7 @@ if(!empty($_POST)){
 		$post[$key] = trim(strip_tags($value));
 	}
 
-	if(!((bool)preg_match('#[A-Za-z]{5,140}#', $post['title-take']))){
+	if(!((bool)preg_match('#[A-Za-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{5,140}#', $post['title-take']))){
 			$errors[] = 'Merci d\'indiquer un titre de recette entre cinq et cent quarante caractères';
 	}
 
@@ -32,7 +32,7 @@ if(!empty($_POST)){
 			$errors[] = 'Merci d\'indiquer une liste d\'ingredients d\'au moins 20 caractères';
 	}
 
-	if(!((bool)preg_match('#[A-Za-z0-9]{20,}#', $post['content-take']))){
+	if(!((bool)preg_match('#[\s*A-Za-z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{20,}#', $post['content-take']))){
 			$errors[] = 'Merci d\'indiquer une présentation de recette d\'au moins 20 caractères';
 	}
 
