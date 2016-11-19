@@ -92,14 +92,14 @@ if($displayImg->execute()) {
 
 	        	<section id="section-recipe">
 
-	        		<h1 class="home h1-home text-center">Les recettes des chefs</h1>
+	        		<h1 class="home h1-home text-center">Nos recettes de Chef</h1>
 	        		<p class="text-recipe text-center">
 	        		Vous avez adoré les plates dégustés chez nous ? Lancez-vous et devenez un vrai Chef !
 	        		<br> Découvrez nos meilleurs recettes pour prolonger le plaisir de vos papilles.
 	        		</p>
 
 	        		<div class="wrapper-recipe">
-	        		<?php foreach ($recipes as $recipe): ?>
+	        			<?php foreach ($recipes as $recipe): ?>
 
 	        			<div class="bloc-recipe">
 		        			<div id="recipe1" class="bloc-recipe-first">
@@ -108,20 +108,19 @@ if($displayImg->execute()) {
 			        				<img class="img-recipe" src="<?=$recipe['picture'];?>"></img>
 			        			</div>
 							</div>
-
 							<a href="view_recipe.php?id=<?=$recipe['id'];?>">
 							<h3 class="h3-home text-center">Lire la recette</h3>
 							</a>
-
 						</div>
 
-					<?php endforeach;?>		        		
+						<?php endforeach;?>	
+					</div>	        		
 	        	</section>
 
 				<section id="section-link-recipe">
 
 					<a href="list_recipe.php" id="link-recipe-style">
-					<div class="link-recipe center-block"> Découvrir toutes les recettes du Chef </div>
+					<div class="link-recipe center-block">Découvrir toutes nos recettes</div>
 					</a>
 					
 				</section>

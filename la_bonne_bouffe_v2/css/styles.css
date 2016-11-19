@@ -93,7 +93,6 @@ a:hover {
 
 .h1-home{
 	font-family: 'Source Sans Pro', sans-serif;
-	font-style: italic;
 	font-size: 1.8em;
 	padding-top: 1em;
 	padding-bottom: 1em;
@@ -102,16 +101,23 @@ a:hover {
 .h2-home{
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1.2em;
-	padding-bottom: 1em;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 }
 
 .h3-home{
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1em;
-	font-style: italic;
-	color: #90837B
+	color: #90837B;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
+a:hover .h3-home{
+	color: #A9414C;
+}
 
 /*******Section slider de index.php*****/
 
@@ -137,7 +143,7 @@ a:hover {
 	text-align: center;
 	margin: auto;
 	position: absolute;
-	left: 8%;
+	left: 14%;
 }
 
 /*******Section recipe de index.php*****/
@@ -174,7 +180,6 @@ a:hover {
 	color: white;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 1em;
-	font-style: italic;
 	margin-top: 2em;
 	margin-bottom: 2em;
 }
@@ -186,6 +191,9 @@ a:hover {
 .bloc-recipe{
 	display: flex;
 	flex-direction: column;
+	background-color: white;
+	border:0;
+	border-radius: 0.5em;
 }
 
 
@@ -194,8 +202,8 @@ a:hover {
 	width: 14.6875em !important;
 	overflow: hidden !important;
 	text-align: center !important;
-	border: 0.0625em, solid;
-	border-radius: 0.25em;
+	/*border: 0.0625em, solid;
+	border-radius: 0.25em;*/
 }
 
 .bloc-recipe-second{
