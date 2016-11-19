@@ -43,28 +43,11 @@ else {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="description" content="TEXTE">
-        <meta name="author" content="TEXTE">
-        <meta name="robots" content="index, follow, archive">
+		<title> Liste de recettes</title>
 
-        <!--META FB-->
-        <meta property="og:title" content="TEXTE">
-        <meta property="og:description" content="TEXTE">
-        <meta property="og:local" content="fr-FR">
-        <meta property="og:site_name" content="TEXTE">
-        <meta property="og:image" content="chemin/acces/url.jpg">
-        <meta property="og:type" content="website-article">
-
-
-
-		<title> Liste des recettes du Chef </title>
-
-	 	<!-- Police Google Font -->
-	    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> 
-	    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
-	            
 	     <!--Icone FontAwesome CDN Bootstrape-->
 	    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> 
+	         
 	         
 	     <!--Feuille de style Bootstrape-->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -77,15 +60,18 @@ else {
 
 
 	<body>
+
 		<?php if (empty($_SESSION)){
 		header('Location: index.php');
 		} ?>
-		<?php include 'header.php';?>
+		
+		<?php include 'header.php'; ?>
+
+
 		<main class="container">
 
-			<h1 class="text-center"> Liste des recettes du Chef présentes sur le site</h1>
+			<h1 class="text-center text-info"> <i class="fa fa-book"></i> Liste des recettes</h1>
 			<hr>
-
 
 			<div>
 				<form method="get" class="form-inline">

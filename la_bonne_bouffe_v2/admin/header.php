@@ -12,7 +12,7 @@ require_once '../inc/connect.php';
             <div id="logo">
                 <a href="../index.php" target="_blank" class="logoHeaderHover"></a>
             </div> 
-               <!-- <img src="../img/logo-back.png">-->
+             
             
 
             <div class="menu-header-back">
@@ -20,14 +20,14 @@ require_once '../inc/connect.php';
 
                    <?php if(isset($_SESSION['permission']) && $_SESSION['permission'] == 2): ?>  
                         <a href="add_user.php"><li>AJOUTER UN UTILISATEUR</li></a>
-                        <a href="list_users.php"><li>LISTE DES UTILISATEURS</li></a>
+                        <a href="list_users.php"><li>LISTE UTILISATEURS</li></a>
                         <a href="edit_header.php"><li>EDITER SLIDER</li></a>
                         <a href="edit_contact.php"><li>MESSAGERIE</li></a>
                     <?php endif; ?>
                     <?php if(!empty($_SESSION)): ?>
                         <a href="my_profile.php"><li>MON PROFIL</li></a>
                         <a href="add_recipe.php"><li>AJOUTER UNE RECETTE</li></a>
-                        <a href="list_recipe.php"><li>LISTE RECETTE</li></a>
+                        <a href="list_recipe.php"><li>LISTE RECETTES</li></a>
                         <a href="logout.php"><li><i class="fa fa-user-times"></i> SE DECONNECTER</li></a> 
                     
                         <!-- <a href="index.php"><li><i class="fa fa-user"></i> SE CONNECTER</li></a> -->

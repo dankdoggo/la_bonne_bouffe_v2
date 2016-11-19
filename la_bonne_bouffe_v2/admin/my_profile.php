@@ -20,10 +20,18 @@ if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
 	<head>
 		<meta charset="utf-8">
 		<title>Mon profil</title>
+
+        <!--Icone FontAwesome CDN Bootstrape-->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> 
+             
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	   <link rel="stylesheet" type="text/css" href="../css/styles.css">
+
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
     </head>
+
+
 	<body>
+
 		<?php if (empty($_SESSION)){
         header('Location: index.php');
         } ?>
@@ -31,11 +39,10 @@ if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
 
 		<main class="container">
 
-
                
                 <h1 class="text-center text-info">
-			<i class="fa fa-user"></i> Mon profil
-		</h1>
+			         <i class="fa fa-user"></i> Mon profil
+                 </h1>
 
                 <hr>
 
@@ -81,7 +88,7 @@ if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <a href="edit_my_profile.php?id=<?=$user['id'];?>" title="Editer mes infos" class="btn btn-info btn-block">
+                                        <a href="edit_my_profile.php?id=<?=$user['id'];?>" title="Editer mes infos" class="btn btn btn-primary btn-block">
                                             <i class="fa fa-edit"></i> Editer
                                         </a>
                                     </div>
@@ -94,8 +101,6 @@ if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
                         </div>
 
 		</main>
-		
-		<footer></footer>
 
 	</body>
 </html>

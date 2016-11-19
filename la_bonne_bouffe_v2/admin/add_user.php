@@ -89,26 +89,43 @@ if(!empty($_POST)){
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 	<head>
+
 		<meta charset="utf-8">
 		<title>Ajouter un utlisateur</title>
+
+
+        <!--Icone FontAwesome CDN Bootstrape-->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> 
+ 
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">	
+
+
 	</head>
+
+
 	<body>
+
 	<?php if (empty($_SESSION)){
 		header('Location: index.php');
 	} ?>
 	<?php include 'header.php'; ?>
+
 		
-		<header></header>
 
 		<main class="container">
 
 		 	<div class="col-sm-6 col-sm-push-3">
 
-				<h1 class="text-center text-info">Ajout d'un utilisateur</h1>
+				<h1 class="text-center text-info"> <i class="fa fa-user-plus"></i> Ajouter un utilisateur
+				</h1>
+
+				<hr>
+
 				<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])): ?>
 				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
@@ -123,66 +140,57 @@ if(!empty($_POST)){
 				<?php endif; ?>
 
 
-
 				<form method="post" class="form-horizontal" enctype="multipart/form-data">
 					
-
-					
-				
 					<label for="username">Pseudo</label>
 					<input type="text" name="username" id="username" placeholder="" class="form-control">
 
-					<br><br>
+					<br>
 					<label for="permission">&Eacute;lévation</label>
 					<select class="form-control" name="permission">
 						<option value="" selected disabled>-- Sélectionner--</option>
 						<option value="1">&Eacute;diteur&nbsp;&nbsp; #Préposéauxpatates</option>
 						<option value="2">Administrateur&nbsp;&nbsp; #GordonRamsay</option>
-
-
-
-
 					</select>
 
 
-					<br><br>
+					<br>
 					<label for="lastname">Nom</label>
 					<input type="text" name="lastname" id="lastname" placeholder="" class="form-control">
 
-					<br><br>
+					<br>
 					<label for="firstname">Prénom</label>
 					<input type="text" name="firstname" id="firstname" placeholder="" class="form-control">
 				
-					<br><br>
+					<br>
 					<label for="password">Mot de passe</label>
 					<input type="password" name="password" id="password" placeholder="" class="form-control">
 
-					<br><br>
+					<br>
 					<label for="email">Email</label>
 					<input type="text" name="email" id="email" placeholder="" class="form-control">
-
-					<br><br>
+					
+					<br>
 					<label for="avatar">Avatar</label>
 					<input id ="avatar" name="avatar" class="input-file" type="file" accept="image/*"><br>
 
-					<br><br>
-					<!-- <button id="" name="" class="btn btn-info btn-block">S'inscrire</button> -->
-					<input type="submit" id="submit" value="Créer l'utilisateur" class="btn btn-info btn-block">
+					<br>
+					<div id="Boutton" class="center-block">
+						<button type="submit" class="btn btn-primary">ENREGISTRER</button>
+					</div>
+
 
 				</form>
 
 			</div>
 				<?php else: ?>
 				<div class="alert alert-danger">
-					
-					Vous n'êtes pas autoriser a voir cette page
-
+					Vous n'êtes pas autorisé à voir cette page
 				</div>
 
 				<?php endif ?>
 		</main>
 		
-		<footer></footer>
 
 	</body>
 </html>

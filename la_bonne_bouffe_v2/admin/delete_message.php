@@ -58,7 +58,7 @@
 
 				<div class="alert alert-danger">
 					
-					Vous n'êtes pas autoriser a voir cette page
+					Vous n'êtes pas autorisé a voir cette page
 
 				</div>
 

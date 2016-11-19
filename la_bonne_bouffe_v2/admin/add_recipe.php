@@ -94,17 +94,22 @@ if(!empty($_POST)){
 
 
 <!DOCTYPE html>
+
 <html lang="fr">
 
 	<head>
 		<meta charset="utf-8">
 		<title>Ajouter une recette</title>
 
-		 <!--Feuille de style Bootstrape-->
 
+	     <!--Icone FontAwesome CDN Bootstrape-->
+	    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous"> 
+	  
+		 <!--Feuille de style Bootstrape-->
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<!-- My CSS -->
         <link href="../css/styles.css" rel="stylesheet">
+
 	</head>
 
 	<body>
@@ -114,7 +119,7 @@ if(!empty($_POST)){
 
 			<main class="container">
 
-				<h1 class="text-center">Enregistrer une nouvelle recette</h1>
+				<h1 class="text-center text-info"> <i class="fa fa-pencil-square-o"></i> Enregistrer une recette</h1>
 				<hr>
 
 				<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
@@ -130,32 +135,34 @@ if(!empty($_POST)){
 
 				<form method="POST" class="form-horizontal" enctype="multipart/form-data">
 
-					<label for="title" class="text-center text-info">Nom de la recette:</label>
+					<label for="title" class="text-center">Nom de la recette:</label>
 					<br>
 					<input id="title" type="text" name="title-take" class="form-control" placeholder="Ex: Risotto de Saint Jacques et Chorizo">
 
 					<br><br>
 
-					<label for="ingredient " class="text-center text-info">Ingredients:</label>
+					<label for="ingredient " class="text-center">Ingredients:</label>
 					<br>
 					<textarea id="ingredient" name="ingredient-take" class="form-control" placeholder="Ex: 1kg de riz à Risotto - 10 grosses Saint Jacques - 1 gros chorizo"></textarea>
 
 					<br><br>
 
-					<label for="recipe" class="text-center text-info">Description:</label>
+					<label for="recipe" class="text-center">Description:</label>
 					<br>
 					<textarea id="recipe" name="content-take" class="form-control" placeholder="Ex: découpez en grosse tranche votre chorizo, nettoyer les Saint-Jacques ..."></textarea>
 
 					<br><br>
 							
-					<label for="photo" class="text-center text-info">Photo:</label>
+					<label for="photo" class="text-center">Photo:</label>
+					<br>
+					<span>Téléchargez une photo carrée: 400px / 400 px</span>
 					<br>
 					<input id="photo" type="file" name="picture-take" class="btn btn-default btn-lg" accept="image/*">
 
 					<br><br>
 
 					<div id="Boutton" class="center-block">
-						<button type="submit" class="btn btn-primary">Enregistrer</button>
+						<button type="submit" class="btn btn-primary">ENREGISTRER</button>
 					</div>
 
 					</form>

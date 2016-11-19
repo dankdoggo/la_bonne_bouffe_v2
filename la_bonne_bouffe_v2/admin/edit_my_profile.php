@@ -126,7 +126,8 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 	<head>
 		<meta charset="utf-8">
 		<title>Modifier mon profil</title>
@@ -134,10 +135,13 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 	</head>
 	<body>
+
 		<?php if (empty($_SESSION)){
 		header('Location: index.php');
 		} ?>
+
 		<?php include 'header.php'; ?>
+		
 		
 		<main class="container">
 			
@@ -167,27 +171,27 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 					<label for="lastname">Nom</label>
 					<input type="lastname" name="lastname" id="lastname" value="<?=$_SESSION['lastname'];?>"  class="form-control">
 
-					<br><br>
+					<br>
 					<label for="firstname">Prénom</label>
 					<input type="text" name="firstname" id="firstname" value="<?=$_SESSION['firstname'];?>"  class="form-control">
 
-					<br><br>
+					<br>
 					<label for="password">Mot de passe</label>
 					<input type="password" name="password" id="password" class="form-control">
 
-					<br><br>
+					<br>
 					<label for="email">Email</label>
 					<input type="text" name="email" id="email" value="<?=$_SESSION['email'];?>"  class="form-control">
 
-					<br><br>
+					<br>
 					<label for="avatar">Avatar</label>
 					<input type="file" name="avatar" id="avatar" class="input-file" accept="image/*">
-
-					
 		
-					<br><br>
-					<input type="submit" value="Modifier les informations" class="btn btn-info btn-block">
+					<br>
 
+					<div id="Boutton" class="center-block">
+							<button type="submit" class="btn btn-primary">ENREGISTRER</button>
+					</div>
 				
 				</form>
 

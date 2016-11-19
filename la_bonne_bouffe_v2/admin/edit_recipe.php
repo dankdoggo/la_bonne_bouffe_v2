@@ -117,7 +117,7 @@ if(!empty($_POST)){
  
         //on lui dit ici si la requete s'execute 
         if($select->execute()){
-            //on crée une varibale $utilisateur pour récupérer les données correpondante à l'ID
+            //on crée une varibale $recipe pour récupérer toutes les données correpondante à l'ID
             $recipe = $select->fetch(PDO::FETCH_ASSOC);
         }
   
@@ -148,7 +148,7 @@ if(!empty($_POST)){
 		
 			<main class="container">
 
-				<h1 class="text-center">Modifier la recette</h1>
+				<h1 class="text-center text-info">Modifier la recette</h1>
 				<hr>
 
            		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($_SESSION['username']);?> </h3>
@@ -167,26 +167,29 @@ if(!empty($_POST)){
 
 				<form method="POST" class="form-horizontal" enctype="multipart/form-data">
 
-					<label for="title" class="text-center text-info">Nom de la recette:</label>
+					<label for="title" class="text-center">Nom de la recette:</label>
 					<br>
 					<input id="title" type="text" name="title-take" class="form-control" value="<?=$recipe['title'];?>">
 
 					<br><br>
 
-					<label for="ingredient " class="text-center text-info">Ingredients:</label>
+					<label for="ingredient " class="text-center">Ingredients:</label>
 					<br>
 					<textarea id="ingredient" name="ingredient-take" class="form-control"><?=$recipe['ingredient'];?>"</textarea>
 
 					<br><br>
 
 
-					<label for="recipe" class="text-center text-info">Description:</label>
+					<label for="recipe" class="text-center">Description:</label>
 					<br>
 					<textarea id="recipe" name="content-take" class="form-control"><?=$recipe['content'];?></textarea>
 
 					<br><br>
 							
-					<label for="photo" class="text-center text-info">Photo:</label>
+					<label for="photo" class="text-center">Photo:</label>
+					<br>
+					<span>Téléchargez une photo carrée: 400px / 400 px</span>
+					<br>
 					<img src="<?=$recipe['picture'];?>" style="width:100px;">
 					<br><br>
 					<input id="photo" type="file" name="picture-take" class="btn btn-default btn-lg" accept="image/*">
@@ -194,10 +197,13 @@ if(!empty($_POST)){
 					<br><br>
 
 					<div id="Boutton" class="center-block">
-						<button type="submit" class="btn btn-primary">Enregistrer</button>
+						<button type="submit" class="btn btn-primary">ENREGISTRER</button>
 					</div>
 
-					</form>
+					<br>
+
+				</form>
+
 			</main>
 	</body>
 
