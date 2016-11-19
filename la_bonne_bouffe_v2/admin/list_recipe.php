@@ -128,7 +128,7 @@ else {
 
 						</td>
 						<td>
-						<?php if($_SESSION['permission'] == 1): ?>
+						<?php if($_SESSION['permission'] == 2): ?>
 							<a style="color:red" href="delete_recipe.php?id=<?=$value['id'];?>"> 
 							<i class="fa fa-trash"></i> Supprimer</a>
 							<?php endif; ?>

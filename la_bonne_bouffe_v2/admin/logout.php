@@ -31,7 +31,7 @@ $logout = false;
 	</head>
 	<body>
 		<header><?php include 'header.php'; ?></header>
-
+        
             <br>
                 <br>
                     <br>
@@ -59,7 +59,7 @@ $logout = false;
                     </div>
                     <?php endif;
                 if(!isset($_SESSION['id'])){
-                    header('Location: ../404.php');
+                    header('Location: index.php');
                 }
                 ?>
             </main>

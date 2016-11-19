@@ -37,6 +37,8 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
                 <h1 class="text-center text-info">
 			<i class="fa fa-user"></i> Profil d'un utilisateur
 		</h1>
+                <?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id']) && !empty($user)): ?>
+
 
                 <hr>
 
@@ -94,7 +96,15 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){
                                 <img src="<?=$user['avatar'];?>" class="img-thumbnail img-responsive">
                             </div>
                         </div>
+                <?php else: ?>
 
+                <div class="alert alert-danger">
+                    
+                    Vous n'êtes pas autoriser a voir cette page
+
+                </div>
+
+            <?php endif ?>
 		</main>
 		
 		<footer></footer>

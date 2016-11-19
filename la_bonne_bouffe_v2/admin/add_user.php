@@ -22,10 +22,10 @@ if(!empty($_POST)){
 		$errors[] = 'Veuillez sélectionner une élévation';
 	}
 	if(empty($post['firstname']) || !minAndMaxLength($post['firstname'], 2, 20)){
-		$errors[] = 'Le Nom doit contenir entre 2 et 20 caractères';
+		$errors[] = 'Le Prénom doit contenir entre 2 et 20 caractères';
 	}
 	if(empty($post['lastname']) || !minAndMaxLength($post['lastname'], 2, 20)){
-		$errors[] = 'Le Prénom doit contenir entre 2 et 20 caractères';
+		$errors[] = 'Le nom doit contenir entre 2 et 20 caractères';
 	}
 	if(!((bool)preg_match('#[A-Za-z0-9]{8,20}#', $post['password']))){
 		$errors[] = 'Le Mot de passe doit contenir entre 8 et 20 caractères (Pas de caractères spéciaux)';
@@ -109,7 +109,7 @@ if(!empty($_POST)){
 		 	<div class="col-sm-6 col-sm-push-3">
 
 				<h1 class="text-center text-info">Ajout d'un utilisateur</h1>
-
+				<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])): ?>
 				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
 						<?=implode('<br>', $errors);?>
@@ -122,8 +122,13 @@ if(!empty($_POST)){
 					</div>
 				<?php endif; ?>
 
+
+
 				<form method="post" class="form-horizontal" enctype="multipart/form-data">
 					
+
+					
+				
 					<label for="username">Pseudo</label>
 					<input type="text" name="username" id="username" placeholder="" class="form-control">
 
@@ -167,7 +172,14 @@ if(!empty($_POST)){
 				</form>
 
 			</div>
+				<?php else: ?>
+				<div class="alert alert-danger">
+					
+					Vous n'êtes pas autoriser a voir cette page
 
+				</div>
+
+				<?php endif ?>
 		</main>
 		
 		<footer></footer>

@@ -1,7 +1,7 @@
 <?php
 
 require_once '../inc/connect.php';
-
+session_start();
 $centerTitle = '<h1 class="text-center text-info">';
 $endCenterTitle = '</h1>';
 $centerText = 'class="text-center"';
@@ -42,6 +42,11 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 	} ?>
 <?php include 'header.php'; ?>
 <main class="container">
+
+	
+
+	<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])):?>
+
 	<div class="col-sm-6 col-sm-push-3">
 		<?php 
 			echo $centerTitle.'Message de '.$message['firstname'].' '.$message['lastname'].$endCenterTitle.'<br>';
@@ -50,6 +55,15 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 			echo $message['message'].'</div>';
 		?>
 	</div>
+	<?php else: ?>
+
+    	<div class="alert alert-danger">
+                    
+         	Vous n'êtes pas autoriser a voir cette page
+
+     	</div>
+
+     <?php endif ?>
 </main>
 </body>
 </html>

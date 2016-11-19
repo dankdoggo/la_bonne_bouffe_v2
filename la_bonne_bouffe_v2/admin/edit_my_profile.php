@@ -2,11 +2,22 @@
 
 require_once '../inc/connect.php';
 require_once '../inc/functions.php';
+
+
 session_start();
 
-if(!empty($_SESSION['permisssion'])){
-    $auth = $_SESSION['permission'];
-}
+// $inf = [ 
+
+// 'firstname' => $_SESSION['firstname'],
+// 'lastname'	=> $_SESSION['lastname'],
+// 'email'		=> $_SESSION['email']
+// ];
+
+
+
+
+$updateAuthor = $_SESSION['id'];
+$updateId = $_GET['id'];
 
 $post = [];
 $errors = [];
@@ -16,7 +27,7 @@ $mimeTypeAllow = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif'];
 $dirUpload = '../uploads/uploads_user/';
 
 if(!empty($_POST)){
-	$post = array_map('trim', array_map('strip_tags', $_POST)); 
+	$post = array_map('trim', array_map('strip_tags', $_POST));
 
 	if(!minAndMaxLength($post['lastname'], 2, 20)){
 		$errors[] = 'Votre prénom doit comporter entre 3 et 20 caractères';
@@ -62,7 +73,7 @@ if(!empty($_POST)){
 		$updateAvatar = true;
 	}
 
-	if(count($errors) === 0){
+	if(count($errors) === 0 && $updateAuthor === $updateId){
 
 
 		$columnSQL = 'firstname = :firstname, lastname = :lastname, email = :email '; // on instencie la variable $column qui contiendra les informations utilisateurs stockées dans la bdd
@@ -95,8 +106,11 @@ if(!empty($_POST)){
 			$formValid = true;
 		}
 		else {
-			var_dump($update->errorInfo());
+			$echec = true;
+			// var_dump($update->errorInfo());
+			
 		}
+		
 	}
 
 }
@@ -115,7 +129,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Modifier un compte utlisateur</title>
+		<title>Modifier mon profil</title>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 		<link rel="stylesheet" type="text/css" href="../css/styles.css">
 	</head>
@@ -129,32 +143,33 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 			
 		 	<div class="col-sm-6 col-sm-push-3">
 
-				<h1 class="text-center text-info">Modifier un compte utlisateur</h1>
+				<h1 class="text-center text-info">Modifier mon profil</h1>
 
 				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
+						Erreur lors de la mise a jour !
 						<?=implode('<br>', $errors);?>
+						
 					</div>
+				
 		
 				<?php elseif(isset($formValid) && $formValid == true): ?>
-
 					<div class="alert alert-success">
 						 compte utilisateur Mis à jour !
 					</div>
 				<?php endif; ?>
-				
-				<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id']) && !empty($user)): ?>
+
 
 				<form method="post" class="form-horizontal" enctype="multipart/form-data">
 					
-					
+					<?php if(!isset($formValid) && !empty($user)): ?>
 					
 					<label for="lastname">Nom</label>
-					<input type="lastname" name="lastname" id="lastname" value="<?=$user['lastname'];?>"  class="form-control">
+					<input type="lastname" name="lastname" id="lastname" value="<?=$_SESSION['lastname'];?>"  class="form-control">
 
 					<br><br>
 					<label for="firstname">Prénom</label>
-					<input type="text" name="firstname" id="firstname" value="<?=$user['firstname'];?>"  class="form-control">
+					<input type="text" name="firstname" id="firstname" value="<?=$_SESSION['firstname'];?>"  class="form-control">
 
 					<br><br>
 					<label for="password">Mot de passe</label>
@@ -162,25 +177,22 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 
 					<br><br>
 					<label for="email">Email</label>
-					<input type="text" name="email" id="email" value="<?=$user['email'];?>"  class="form-control">
+					<input type="text" name="email" id="email" value="<?=$_SESSION['email'];?>"  class="form-control">
 
 					<br><br>
 					<label for="avatar">Avatar</label>
 					<input type="file" name="avatar" id="avatar" class="input-file" accept="image/*">
 
+					
+		
 					<br><br>
 					<input type="submit" value="Modifier les informations" class="btn btn-info btn-block">
 
+				
 				</form>
 
 			</div>
-			<?php else: ?>
-
-				<div class="alert alert-danger">
-					
-					Vous n'êtes pas autoriser a voir cette page
-
-				</div>
+			
 
 			<?php endif ?>
 		</main>

@@ -33,9 +33,10 @@ else {
 	} ?>
 	<?php include 'header.php'; ?>
 		<main class="container">
-
+			
 			<h1 class="text-center text-info">Liste utilisateurs</h1>
 
+				<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])): ?>
 				<table class="table">
 					<thead>
 						<tr>
@@ -82,6 +83,15 @@ else {
 					<?php endforeach; ?>
 					</tbody>
 				</table>
+				<?php else: ?>
+
+				<div class="alert alert-danger">
+					
+					Vous n'êtes pas autoriser a voir cette page
+
+				</div>
+
+			<?php endif ?>
 		</main>
 	</body>
 </html>

@@ -145,6 +145,9 @@ if($checkImg->execute()) {
 	
 <h1 class="text-center text-info"> Editer le slider et les coordonnées</h1>
 
+<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])): ?>
+
+
 <?php if(count($errors) > 0) : ?>
 
     <div class="alert alert-danger">
@@ -264,5 +267,14 @@ if($checkImg->execute()) {
 		</div>
 		<br>
 	</div>
+	<?php else: ?>
+
+		<div class="alert alert-danger">
+					
+					Vous n'êtes pas autoriser a voir cette page
+
+		</div>
+
+		<?php endif; ?>
 </body>
 </html>

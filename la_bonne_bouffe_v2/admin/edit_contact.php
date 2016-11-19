@@ -47,6 +47,8 @@ session_start();
 <h1 class="text-center text-info">Liste des messages</h1>
 	
 	<!-- Liste des messages -->
+	<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id'])): ?>
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -85,6 +87,14 @@ session_start();
 			?>	
 		</tbody>
 	</table>
+	<?php else: ?>
+		<div class="alert alert-danger">
+				
+			Vous n'êtes pas autoriser a voir cette page
+
+		</div>
+
+	<?php endif ?>
 </main>	
 </body>
 </html>

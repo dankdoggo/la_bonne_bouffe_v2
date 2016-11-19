@@ -46,6 +46,7 @@
 			<i class="fa fa-trash"></i> Supprimer ce message
 		</h1>
 
+			<?php if($_SESSION['permission'] == 2 && !empty($_SESSION['id']) && !empty($user)): ?>
 
 			<form method="post" class="pager">
 				 <input type="button" onclick="history.back();" value="Annuler" class="btn btn-default">
@@ -53,6 +54,15 @@
 				 <input type="submit" name="delete" value="Confirmer la suppression " class="btn btn-success">
 			</form>
 
+			<?php else: ?>
+
+				<div class="alert alert-danger">
+					
+					Vous n'êtes pas autoriser a voir cette page
+
+				</div>
+
+			<?php endif ?>
 	</main>
 
 </body>
