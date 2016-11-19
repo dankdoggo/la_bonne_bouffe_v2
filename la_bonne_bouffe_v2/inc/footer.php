@@ -1,4 +1,14 @@
+<?php
+	
 
+$selectAddress= $bdd->prepare('SELECT * FROM lbb_edit_address');
+
+if($selectAddress->execute()){
+    //on crée une varibale $utilisateur pour récupérer les données correpondante à l'ID
+    $address = $selectAddress->fetch(PDO::FETCH_ASSOC);
+}
+
+?>
 
 <div class="wrapper"> <!-- Wrapper comprenant header + main + footer -->
 
@@ -8,11 +18,14 @@
 			<div class="row">
 	
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-					<div>La bonne bouffe </div>
-					<div>Rue de la Gastronomie - Quartier Saint Michel</div>
-					<div>33000 BORDEAUX</div>
-					<div>restaurant.la.bonne.bouffe@gmail.com</div>
-					<div>01.23.45.67.89</div>
+		
+					
+					<div><?=$address['name-resto']?></div>
+					<div><?=$address['address']?></div>
+					<div><?=$address['zipcode']?>&nbsp;<?=$address['city']?></div>
+					<div><?=$address['email']?></div>
+					<div><?=$address['phone']?></div>
+									
 				</div>
 	
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 text-center mentions-footer">

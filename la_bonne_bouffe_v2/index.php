@@ -74,8 +74,16 @@ if($displayImg->execute()) {
 	<main>
 	<section id="section-slider">
 
-	<div class="bloc-slider center-block">
-		<img class="img-slider" src="">
+	<div id="carrousel" class="bloc-slider center-block">
+		<ul>
+			<li>
+				<?php foreach ($sliders as $slider) : ?>
+					
+					<img class="img-slider" src="<?=$slider['value'];?>">
+				
+				<?php endforeach; ?>
+			</li>
+		</ul>
 	</div>
 		
 		      

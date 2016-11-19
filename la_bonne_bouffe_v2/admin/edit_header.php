@@ -18,6 +18,8 @@ $dirUpload = '../uploads/uploads_slider/';
 $nbSliders;
 $updateValid;
 
+
+
 if(!empty($_FILES)) { // tant que les champs ne sont pas vides on effectue pas les vérif donc si l'admin ne change pas ça sera pas pris en compte
 
 	if ($_POST['action'] === 'formulaire_1') { // si on est dans le formulaire 1 alors on va faire les vérif qui lui correspondent
@@ -90,22 +92,26 @@ if(!empty($_POST)) {
 	    	$errors[] = 'Le nom de la ville doit comporter entre 3 et 50 caractères';
 	    }
 
+	    if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)) {
+	    	$errors[] = 'Veuillez entrer une adresse mail valide';
+	    }
+
 	    if(!is_numeric($post['phone']) && strlen($post['phone']) != 10) {
 	    	$errors[] = 'Le numéro de téléphone doit comporter 10 chiffres';
 	    }
 
 	    if(isset($errors) && count($errors) === 0) {
 
-		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "name-resto"');
-		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "address"');
-		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "zipcode"');
-		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "city"');
-		    $update = $bdd->prepare('UPDATE lbb_edit_home SET value = :value WHERE data = "phone"');
-			$update->bindValue(':value', $post['name-resto']);
-			$update->bindValue(':value', $post['address']);
-			$update->bindValue(':value', $post['zipcode']);
-			$update->bindValue(':value', $post['city']);
-			$update->bindValue(':value', $post['phone']);
+	    	$columSQL = 'name-resto = :name-resto, address = :address, zipcode = :zipcode, city = :city, phone = :phone, email = :email';
+
+		    $update = $bdd->prepare('UPDATE lbb_edit_address SET '.$columSQL.'');
+		    
+			$update->bindValue(':name-resto', $post['name-resto']);
+			$update->bindValue(':address', $post['address']);
+			$update->bindValue(':zipcode', $post['zipcode']);
+			$update->bindValue(':city', $post['city']);
+			$update->bindValue(':phone', $post['phone']);
+			$update->bindValue(':email', $post['email']);
 						
 			if($update->execute()){
 				$updateValid = true;
@@ -186,7 +192,7 @@ if($checkImg->execute()) {
 					<?php endfor; ?>
 
 					<br>
-					<p class="text-left text-danger small">Veuillez uploader des images ne dépassant pas 250px </p>
+					
 					<input type="submit" value="Ajouter des images" class="btn btn-primary">
 
 				</form>
@@ -245,19 +251,23 @@ if($checkImg->execute()) {
 
                 <br>
 				<label for="address">Adresse</label><br>
-				<input type="text" id="address" name="address" class="form-control" placeholder="Rue de la Gastro">
+				<input type="text" id="address" name="address" class="form-control" placeholder="Rue de la Gastronomie">
 
 				<br>
 				<label for="zipcode">Code postal</label><br>
-				<input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="33124">
+				<input type="text" id="zipcode" name="zipcode" class="form-control" placeholder="33000">
 
 				<br>
 				<label for="city">Ville</label><br>
-				<input type="text" id="city" name="city" class="form-control" placeholder="Bègles">
+				<input type="text" id="city" name="city" class="form-control" placeholder="Bordeaux">
+
+				<br>
+				<label for="email">Email</label><br>
+				<input type="text" id="email" name="email" class="form-control" placeholder="restaurant@labonne-bouffe.fr">
 
 				<br>
 				<label for="phone">Téléphone</label><br>
-				<input type="text" id="phone" name="phone" class="form-control" placeholder="0523141245">
+				<input type="text" id="phone" name="phone" class="form-control" placeholder="05.23.14.12.45">
 
 				<br>
 				<input type="submit" value="Editer les coordonnées" class="btn btn-primary">
