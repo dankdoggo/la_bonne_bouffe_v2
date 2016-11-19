@@ -1,5 +1,6 @@
 <?php
-	
+
+require_once 'connect.php';	
 
 $selectAddress= $bdd->prepare('SELECT * FROM lbb_edit_address');
 
