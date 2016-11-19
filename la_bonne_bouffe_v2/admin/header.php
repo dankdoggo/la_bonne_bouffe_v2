@@ -9,7 +9,11 @@ require_once '../inc/connect.php';
     
         <nav class="wrapper-header-back">
 
-            <div id="logo"><img src="../img/logo-back.png"></div>
+            <div id="logo">
+                <a href="../index.php" target="_blank" class="logoHeaderHover"></a>
+            </div> 
+               <!-- <img src="../img/logo-back.png">-->
+            
 
             <div class="menu-header-back">
                 <ul>

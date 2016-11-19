@@ -38,7 +38,7 @@ a:hover {
 }
 
 .info-contact{
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Josefin Sans', sans-serif;
 	color: #EBEBE8;
 	font-size: 1em;
 	font-style: italic;
@@ -56,6 +56,19 @@ a:hover {
 	color: #EBEBE8;
 	line-height: 3em;
 	padding-right: 2em;
+}
+
+.logoHover{
+	width : 100px;
+    height : 100px;
+    display : block; /*Très important, sinon les dimensions ne sont pas prises en compte*/
+    background : url("../img/logo-front.png") no-repeat;
+}
+
+
+.logoHover:hover
+{
+    background-image : url("../img/logo-front-hover.png");
 }
 
 /*********FOOTER*************************/
@@ -378,6 +391,21 @@ a:hover .h3-home{
 #logo{
 	padding-left: 2em;
 }
+
+
+.logoHeaderHover{
+	width : 46px;
+    height : 55px;
+    display : block; /*Très important, sinon les dimensions ne sont pas prises en compte*/
+    background : url("../img/logo-back.png") no-repeat;
+}
+
+
+.logoHeaderHover:hover
+{
+    background-image : url("../img/logo-back-hover.png");
+}
+
 
 .menu-header-back{
 	padding-right:2em;
