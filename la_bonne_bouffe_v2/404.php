@@ -53,7 +53,10 @@
 	        	<p class="error_message">Oups...on a pas trouvé ce que vous recherchez</p>
 	        </main>
 
-
+	        <!-- easter egg 404 mp3 -->
+	        <audio autoplay="">
+	        	<source src="media/404_not_found.mp3" type="audio/mpeg">
+	        </audio>		
 
 	       <?php include_once 'inc/footer.php'; ?>
 
