@@ -10,63 +10,68 @@ $errors = [];
 $hasError = false;
 $formValid = false;
 
-if(!empty($_POST)){
+if(empty($_SESSION)){
 
-	//Nettoyage du donnée
-	foreach ($_POST as $key => $value) {
-		$post[$key] = trim(strip_tags($value));
-	}
+	if(!empty($_POST)){
 
-	//Vérification de l'existence du surnom en bdd
-	if(!usernameExist($post['username'], $bdd)){
-		$errors[] = 'Le couple identifiant/mot de passe est incorrect';
-	}
-
-	if(empty($post['password'])){
-		$errors[] = 'Le mot de passe doit être complété';
-	}
-
-	if(count($errors) === 0){
-		$select = $bdd->prepare('SELECT * FROM lbb_users WHERE username = :username');
-		$select->bindValue(':username', $post['username']);
-
-		if($select->execute()){
-			$user = $select->fetch(PDO::FETCH_ASSOC); // On récupère l'utilisateur pour pouvoir comparer son mot de passe et le connecter si besoin
-
-			//Si les mots de passe correspondent, on peuple la session
-			if(password_verify($post['password'], $user['password'])){	
-					$formValid = true;
-
-					if($formValid){
-						$_SESSION = [
-							'username'		=>	$user['username'],
-							'firstname'		=>	$user['firstname'],
-							'lastname'		=>  $user['lastname'],
-							'permission'	=>	$user['permission'],
-							'email'			=> 	$user['email'],
-							'id'			=> 	$user['id'],
-						];
-
-						if(!empty($_SESSION)){ //(éditeur = 1, admin = 2) Si l'utilisateur est un éditeur, alors on redirige sur la liste
-							header('Location: my_profile.php');
-							die();
-						}
-							
-					}else{
-						header('Location: my_profile.php');
-					}
-			}
-			else {
-				$errors[] = 'Le couple identifiant/mot de passe est incorrect';
-				$hasError = true;
-			}
+		//Nettoyage du donnée
+		foreach ($_POST as $key => $value) {
+			$post[$key] = trim(strip_tags($value));
 		}
-	}else{
-		$hasError = true;
+
+		//Vérification de l'existence du surnom en bdd
+		if(!usernameExist($post['username'], $bdd)){
+			$errors[] = 'Le couple identifiant/mot de passe est incorrect';
+		}
+
+		if(empty($post['password'])){
+			$errors[] = 'Le mot de passe doit être complété';
+		}
+
+		if(count($errors) === 0){
+			$select = $bdd->prepare('SELECT * FROM lbb_users WHERE username = :username');
+			$select->bindValue(':username', $post['username']);
+
+			if($select->execute()){
+				$user = $select->fetch(PDO::FETCH_ASSOC); // On récupère l'utilisateur pour pouvoir comparer son mot de passe et le connecter si besoin
+
+				//Si les mots de passe correspondent, on peuple la session
+				if(password_verify($post['password'], $user['password'])){	
+						$formValid = true;
+
+						if($formValid){
+							$_SESSION = [
+								'username'		=>	$user['username'],
+								'firstname'		=>	$user['firstname'],
+								'lastname'		=>  $user['lastname'],
+								'permission'	=>	$user['permission'],
+								'email'			=> 	$user['email'],
+								'id'			=> 	$user['id'],
+							];
+
+							if(!empty($_SESSION)){ //(éditeur = 1, admin = 2) Si l'utilisateur est un éditeur, alors on redirige sur la liste
+								header('Location: my_profile.php');
+								die();
+							}
+								
+						}else{
+							header('Location: my_profile.php');
+						}
+				}
+				else {
+					$errors[] = 'Le couple identifiant/mot de passe est incorrect';
+					$hasError = true;
+				}
+			}
+		}else{
+			$hasError = true;
+		}
+
 	}
-
+}else{
+	header('Location: my_profile.php');
+	die();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
