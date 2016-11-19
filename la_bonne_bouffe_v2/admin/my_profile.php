@@ -81,6 +81,7 @@ if(isset($_SESSION['id']) && is_numeric($_SESSION['id'])){
 
                                 <div class="row">
                                     <div class="col-md-6">
+                                        <a href="edit_my_profile.php?id=<?=$user['id'];?>" title="Editer mes infos" class="btn btn-info btn-block">
                                             <i class="fa fa-edit"></i> Editer
                                         </a>
                                     </div>
