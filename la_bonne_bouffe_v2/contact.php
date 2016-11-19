@@ -26,7 +26,7 @@ if (!empty($_POST)) {
 
 	if(!empty($post['FirstName-take'])){ //Si le champ prénom n'est pas vide alors on vérifie qu'il commence bien en majuscule
 
-		if(!((bool)preg_match('#^[A-Z]+[a-z]#', $post['FirstName-take']))){ 
+		if(!((bool)preg_match('#^[A-Z]+[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]#', $post['FirstName-take']))){ 
 				$errors[] = 'Le prénom doit commencer par une majuscule';
 			}
 	}else{
@@ -35,7 +35,7 @@ if (!empty($_POST)) {
 
 	if(!empty($post['LastName-take'])){ //Si le champ nom n'est pas vide alors on vérifie qu'il commence bien en majuscule
 
-		if(!((bool)preg_match('#^[A-Z]+[a-z]#', $post['LastName-take']))){ 
+		if(!((bool)preg_match('#^[A-Z]+[a-záàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]#', $post['LastName-take']))){ 
 				$errors[] = 'Le nom de famille doit commencer par une majuscule';
 			}
 	}else{
