@@ -6,38 +6,9 @@ require_once 'inc/functions.php';
 $get =[];
 $sql='';
 
-/*PAGINATION DE RESULTAT */ //PAS FINI
-$itemsPerPage = 3; // nombre de résultats par page
 
 
- /*REQUETE PAGINATION DE RESULTAT */
- // Permet d'identifier le numéro de la page courante. Si pas défini par défaut c'est la page 1
-
-    if (isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])) {
-    	$page = (int) $_GET['page'];
-    }
-    else{
-    	$page = 1;
-    }
-
-// On réalise une requête SELECT COUNT pour savoir le nombre de recettes écrites dans la base.
-// on retourne l'ensemble des résultats dans une variable  $result
-//On crée la variable $Nbrecette pour stocker le nombre total de recette
-$count = $bdd->prepare('SELECT COUNT(*) AS total FROM lbb_recipe');
-$result = $count->fetch();
-$NbRecette = $result['total'];
-var_dump($count);
-
-// On calcul le nombre de page à afficher pour créer les liens numérotés
-// La fonction ceil() arrondit au nombre supérieur notre division. 
-//le nombre total de page = nombre total article/ nombre d'article par page
-$nbTotalPages = ceil($NbRecette / $itemsPerPage); 
-
-// Permet de calculer la page de démarrage. 
-$startPage = ($page - 1) * $itemsPerPage;
-
-
-/*PHP module de recherche Doublé de l'affichage des pages (toutes ou celles concernées par la recherche)*/
+/*PHP module de recherche */
 if (!empty($_GET)) {
 	    foreach ($_GET as $key => $value) { 
         $get[$key] = trim(strip_tags($value));
@@ -50,15 +21,9 @@ if (!empty($_GET)) {
 } /*fermeture première condition !empty $_GET*/
 
 
-// On calcul le nombre de page à afficher (pour afficher les liens)
-// La fonction ceil() arrondit au nombre supérieur notre division. 
-$nbTotalPages = ceil($NbRecette / $itemsPerPage); 
-
 // on prépare la requête de recherche avec l'info de pagination
-$search = $bdd->prepare('SELECT * FROM lbb_recipe'.$sql.' ORDER BY id DESC LIMIT :startPage, :msgParPage');
-
-$search->bindValue(':startPage', $startPage, PDO::PARAM_INT);
-$search->bindValue(':msgParPage', $itemsPerPage, PDO::PARAM_INT);
+$search = $bdd->prepare('SELECT * FROM lbb_recipe'.$sql.' ORDER BY id DESC LIMIT :maxi');
+$search->bindValue(':maxi', 6, PDO::PARAM_INT);
 
 if(!empty($sql)){
 	$search->bindValue(':search', '%'.$get['search'].'%');
@@ -93,7 +58,7 @@ else {
 
 	<main>
 		<section id="section-list-recipe">
-			<h1 class="text-center title-section-list">Liste des recettes du chef</h1>
+			<h1 class="text-center title-section-list">Liste des recettes du Chef</h1>
 			
 			<div class="contain-search-recipe">
 				<form method="get" class="form-inline">
@@ -135,14 +100,6 @@ else {
 						<?php endif?>	
 					<?php endforeach; ?>		
 				</div>
-
-				<ul>
-				<?php for($i=1;$i<=$nbTotalPages;$i++):?>
-					<li>
-						<a href="list_recipe.php?page=<?=$i;?>"><?=$i;?></a>
-					</li>
-				<?php endfor;?>
-				</ul>
 
 			</div>
 
