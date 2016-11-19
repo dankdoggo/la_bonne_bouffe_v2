@@ -8,7 +8,38 @@ $sql='';
 
 
 
+
 /*PHP module de recherche */
+
+ /*REQUETE PAGINATION DE RESULTAT */
+ // Permet d'identifier le numéro de la page courante. Si pas défini par défaut c'est la page 1
+
+    if (isset($_GET['page']) && !empty($_GET['page']) && is_numeric($_GET['page'])) {
+    	$page = (int) $_GET['page'];
+    }
+    else{
+    	$page = 1;
+    }
+
+// On réalise une requête SELECT COUNT pour savoir le nombre de recettes écrites dans la base.
+// on retourne l'ensemble des résultats dans une variable  $result
+//On crée la variable $Nbrecette pour stocker le nombre total de recette
+$count = $bdd->prepare('SELECT COUNT(*) AS total FROM lbb_recipe');
+$result = $count->fetch();
+$NbRecette = $result['total'];
+//var_dump($count);
+
+// On calcul le nombre de page à afficher pour créer les liens numérotés
+// La fonction ceil() arrondit au nombre supérieur notre division. 
+//le nombre total de page = nombre total article/ nombre d'article par page
+$nbTotalPages = ceil($NbRecette / $itemsPerPage); 
+
+// Permet de calculer la page de démarrage. 
+$startPage = ($page - 1) * $itemsPerPage;
+
+
+/*PHP module de recherche Doublé de l'affichage des pages (toutes ou celles concernées par la recherche)*/
+
 if (!empty($_GET)) {
 	    foreach ($_GET as $key => $value) { 
         $get[$key] = trim(strip_tags($value));
@@ -88,7 +119,7 @@ else {
 								</div>	
 							</div>	
 							</a>
-						<?php else : ?>
+						<?php elseif(empty($get['search'])) : ?>
 							<a href="view_recipe.php?id=<?=$value['id']?>" class="linkRecipe">
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 contain-img-text-list-recipe">
 								<div class="title-list-recipe"><?=$value['title'];?></div>
@@ -96,8 +127,10 @@ else {
 									<img src="<?=$value['picture'];?>" alt="recipe" class="img-list-recipe">
 								</div>	
 							</div>	
-							</a>	
-						<?php endif?>	
+							</a>
+						<?php elseif(empty($value)) : ?> <!--Si jamais il ne retourne rien (même si théoriquement, on aura toujours quelque chose)-->	
+							<p class="jumbotron alert alert-danger">Nous n'avons pas trouvé ce que vous recherchez</p>		
+						<?php endif;?>	
 					<?php endforeach; ?>		
 				</div>
 
