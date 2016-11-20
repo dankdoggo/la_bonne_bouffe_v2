@@ -110,6 +110,9 @@ if(empty($_SESSION)){
 			<input type="submit" value="Se connecter" class="btn btn-primary">
 		</form>
 
+		<br>
+		<a href="forgot_password.php">Mot de passe oublié ? Cliquer ici !</a>
+
 		</div>
 
 	</div>

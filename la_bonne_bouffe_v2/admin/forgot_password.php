@@ -28,7 +28,7 @@ if(!empty($_POST)){
 		
 	$insert->bindValue(':token', $token);
 	$insert->bindValue(':email', $post['email']);
-echo'toto';
+
 		if($insert->execute()){ // on execute la requete SQL
 				$formValid = true;
 				/*$email = $post['email'];*/
@@ -71,7 +71,6 @@ echo'toto';
 
 }
 
-var_dump($errors);
 
 /*----------------------------------- MAIL PHP -----------------------------------*/
 
