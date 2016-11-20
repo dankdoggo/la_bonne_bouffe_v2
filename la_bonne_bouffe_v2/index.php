@@ -50,6 +50,7 @@ if($displayImg->execute()) {
 	 	<!-- Police Google Font -->
 	    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet"> 
 	    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet"> 
+	    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
 	    <!--appel librairy jquery-->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

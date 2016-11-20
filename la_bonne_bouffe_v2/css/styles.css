@@ -32,16 +32,15 @@ a:hover {
 }
 
 .titre-contact{
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Kaushan Script', cursive;
 	color: #EBEBE8;
-	font-size: 1.5em;
+	font-size: 1.7em;
 }
 
 .info-contact{
 	font-family: 'Josefin Sans', sans-serif;
 	color: #EBEBE8;
 	font-size: 1em;
-	font-style: italic;
 }
 
 .bloc-contact{
@@ -51,7 +50,7 @@ a:hover {
 
 
 .nous-contacter{
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'Kaushan Script', cursive;
 	font-size: 1.5em;
 	color: #EBEBE8;
 	line-height: 3em;

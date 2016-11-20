@@ -7,7 +7,7 @@
 		<div class="bloc-contact">
 		<a href="index.php">
 	  		<div class="titre-contact"><strong>La bonne bouffe</strong></div>
-	  		<div class="info-contact"> Le restaurant que vous allez adorer </div>
+	  		<div class="info-contact"> Une cuisine de caractère</div>
 	  	</a>
 	  	</div>
 
@@ -20,8 +20,7 @@
 		<div>
 			<a href="contact.php">
 				<div class="nous-contacter">
-					<i class="fa fa-envelope-o"></i>
-					&nbsp; Nous contacter
+					Nous contacter
 				</div>
 			</a>
 		<div>
