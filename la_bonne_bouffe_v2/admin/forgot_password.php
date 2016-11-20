@@ -29,13 +29,14 @@ if(!empty($_POST)){
 	$insert->bindValue(':token', $token);
 	$insert->bindValue(':email', $post['email']);
 
-		if($insert->execute()){ // on execute la requete SQL
+		if($insert->execute()){ 
 				$formValid = true;
-				/*$email = $post['email'];*/
-
+				
+	
 			// le message qui sera envoyé
+				$email = $post['email'];
 				$token = token_password();
-				$contentmail = '<a href="https://localhost/la_bonne_bouffe/admin/pswd_reset.php?token='.$token.'">Bonjour, Veuillez cliquer sur le lien suivant pour modifier votre mot de passe </a>';
+				$contentmail = '<a href="https://localhost/la_bonne_bouffe/admin/new_password.php?token='.$token.'&email='.$email.'">Bonjour, Veuillez cliquer sur le lien suivant pour modifier votre mot de passe </a>';
 				                             
 
 				$mail = new PHPMailer;
@@ -49,7 +50,7 @@ if(!empty($_POST)){
 				$mail->Charset = 'utf-8';                                    // TCP port to connect to
 
 				$mail->setFrom('restaurant.la.bonne.bouffe@gmail.com');		 		 // EXPEDITEUR	
-				$mail->addAddress('romain.ml@hotmail.fr');     // DESTINATAIRE
+				$mail->addAddress($post['email']);     // DESTINATAIRE
 
 
 				$mail->Subject = 'Récupération mot de passe ';
@@ -57,7 +58,7 @@ if(!empty($_POST)){
 				$mail->AltBody = $contentmail; // sans html
 			
 			if(!$mail->send()) {
-				  $errors[] = 'Message could not be sent.';
+				  $errors[] = 'Le message n\'a pu être envoyé.';
 				  $errors[] = 'Mailer Error: ' . $mail->ErrorInfo;
 				
 			}
