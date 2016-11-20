@@ -151,7 +151,7 @@ if(!empty($_POST)){
 				<h1 class="text-center text-info">Modifier la recette</h1>
 				<hr>
 
-           		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($_SESSION['username']);?> </h3>
+           		<h3 class="text-center"> Vous allez modifier la recette <?=ucfirst($recipe['title']);?> <br>Ecrite par <?=ucfirst($recipe['username_author']);?> </h3>
            		<br><br>
 
 				<!-- Affichage des messages d'erreurs (condition vérification formulaire)-->
