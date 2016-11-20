@@ -5,14 +5,17 @@ require_once '../vendor/autoload.php'; // permet de charger les packages compose
 require_once '../inc/connect.php';
 require_once '../inc/functions.php'; 
 
+$token = token_password();
+
 
 $errors = [];
 $post = [];
 
-				
 
-if(!empty($_POST)){ 
-		$post = array_map('trim', array_map('strip_tags', $_POST)); 
+				
+// 
+if(!empty($_GET)){ 
+		$post = array_map('trim', array_map('strip_tags', $_GET));
 
 	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
 		$errors[] = 'L\'adresse email est invalide';
@@ -34,8 +37,8 @@ if(!empty($_POST)){
 				
 	
 			// le message qui sera envoyé
-				$email = $post['email'];
-				$token = token_password();
+			$email = $post['email'];
+				
 				$contentmail = '<a href="https://localhost/la_bonne_bouffe/admin/new_password.php?token='.$token.'&email='.$email.'">Bonjour, Veuillez cliquer sur le lien suivant pour modifier votre mot de passe </a>';
 				                             
 
@@ -113,7 +116,7 @@ if(!empty($_POST)){
 				
 				
 
-				<form method="POST">
+				<form method="GET">
 					
 					<p>Veuillez entrer votre adresse email pour recevoir un nouveau mot de passe</p>
 					<label for="email">Email</label><br>
