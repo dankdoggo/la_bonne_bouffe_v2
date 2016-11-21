@@ -14,17 +14,18 @@ $tokenValid = false;
 
 	
 			
-		$check = $bdd->prepare('SELECT * FROM lbb_token WHERE token = :token AND email =:email');
+	$check = $bdd->prepare('SELECT * FROM lbb_token WHERE token = :token AND email =:email');
 		
 
-		$check->bindValue(':token', $_GET['token']);
-		$check->bindValue(':email', $_GET['email']);
+	$check->bindValue(':token', $_GET['token']);
+	$check->bindValue(':email', $_GET['email']);
 		
-			if($check_get->execute()){
-				if($check_get->fetchColumn() > 0){
+		if($check_get->execute()){
+			if($check_get->fetchColumn() > 0){
 					$tokenValid = true;
-				}			
 			}
+		}			
+			
 	
 	// on vérifie si l email contenu dans l'URl correspond à celui stocké dans lbb_users, si oui : $userValid = true
 
@@ -34,9 +35,9 @@ $tokenValid = false;
 		if($query->execute()){
 			$user = $query->fetcha(PDO::FETCH_ASSOC);	
 		
-			
+		}	
 	
-	
+	}
 		
 		if(!empty($_user){
 			$_post = array_map('trim', array_map('strip_tags', $_POST)); 
@@ -53,7 +54,9 @@ $tokenValid = false;
 			if($update->execute()){
 				$passwordValid = true;
 
-		
+			}
+		}
+	}
 	
 
 

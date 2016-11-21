@@ -9,18 +9,18 @@ $token = token_password();
 
 
 $errors = [];
-$post = [];
+$get = [];
 
 
 				
 // 
 if(!empty($_GET)){ 
-		$post = array_map('trim', array_map('strip_tags', $_GET));
+		$get = array_map('trim', array_map('strip_tags', $_GET));
 
-	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
+	if(!filter_var($post['get'], FILTER_VALIDATE_EMAIL)){
 		$errors[] = 'L\'adresse email est invalide';
 	}
-	if(!emailExist($post['email'], $bdd)){
+	if(!emailExist($get['email'], $bdd)){
 		$errors[] = 'l\'adresse email n\'existe pas';
 	}
 
@@ -30,14 +30,14 @@ if(!empty($_GET)){
 
 		
 	$insert->bindValue(':token', $token);
-	$insert->bindValue(':email', $post['email']);
+	$insert->bindValue(':email', $get['email']);
 
 		if($insert->execute()){ 
 				$formValid = true;
 				
 	
 			// le message qui sera envoyé
-			$email = $post['email'];
+			$email = $get['email'];
 				
 				$contentmail = '<a href="https://localhost/la_bonne_bouffe/admin/new_password.php?token='.$token.'&email='.$email.'">Bonjour, Veuillez cliquer sur le lien suivant pour modifier votre mot de passe </a>';
 				                             
@@ -53,7 +53,7 @@ if(!empty($_GET)){
 				$mail->Charset = 'utf-8';                                    // TCP port to connect to
 
 				$mail->setFrom('restaurant.la.bonne.bouffe@gmail.com');		 		 // EXPEDITEUR	
-				$mail->addAddress($post['email']);     // DESTINATAIRE
+				$mail->addAddress($email);     // DESTINATAIRE
 
 
 				$mail->Subject = 'Récupération mot de passe ';
