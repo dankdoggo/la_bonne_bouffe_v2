@@ -1,8 +1,15 @@
 <?php
 
+session_start();
+
 require_once '../inc/connect.php';
 require_once '../inc/functions.php';
-session_start();
+
+
+if (empty($_SESSION)){
+	header('Location: index.php');
+} 
+
 $get =[];
 $sql='';
 
@@ -61,9 +68,7 @@ else {
 
 	<body>
 
-		<?php if (empty($_SESSION)){
-		header('Location: index.php');
-		} ?>
+		
 		
 		<?php include 'header.php'; ?>
 

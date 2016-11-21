@@ -105,8 +105,8 @@ if($displayImg->execute()) {
 	        			<div class="bloc-recipe">
 		        			<div id="recipe1" class="bloc-recipe-first">
 			        			<h2 class="home h2-home text-center"><?=$recipe['title'];?></h2>
-								<div class="bloc-recipe-second">
-			        				<img class="img-recipe" src="<?=$recipe['picture'];?>"></img>
+			        			<div class="bloc-recipe-second">
+			        				<img class="img-recipe" src="uploads/uploads_recipe/photo_recette_58315986ab378.jpg"></img>
 			        			</div>
 							</div>
 							<a href="view_recipe.php?id=<?=$recipe['id'];?>">
