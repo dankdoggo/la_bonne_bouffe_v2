@@ -129,7 +129,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id'])){ // si l'ID est ok
 			
 		 	<div class="col-sm-6 col-sm-push-3">
 
-				<h1 class="text-center text-info">Modifier un compte utlisateur</h1>
+				<h1 class="text-center text-info">Modifier un compte utilisateur</h1>
 
 				<?php if(count($errors) > 0): ?>
 					<div class="alert alert-danger">
