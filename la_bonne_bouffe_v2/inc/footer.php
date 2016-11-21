@@ -21,7 +21,7 @@ if($selectAddress->execute()){
 				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 		
 					
-					<div><?=$address['name-resto']?></div>
+					<div><?=$address['nameresto']?></div>
 					<div><?=$address['address']?></div>
 					<div><?=$address['zipcode']?>&nbsp;<?=$address['city']?></div>
 					<div><?=$address['email']?></div>

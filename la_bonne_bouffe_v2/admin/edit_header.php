@@ -104,11 +104,11 @@ if(!empty($_POST)) {
 	
 	    if(isset($errors) && count($errors) === 0) {
 
-	    	$columSQL = 'name-resto = :name-resto, address = :address, zipcode = :zipcode, city = :city, phone = :phone, email = :email';
+	    	/*$columSQL = 'name-resto = :name-resto, address = :address, zipcode = :zipcode, city = :city, phone = :phone, email = :email';*/
 
-		    $update = $bdd->prepare('UPDATE lbb_edit_address SET '.$columSQL.'');
+		    $update = $bdd->prepare('UPDATE lbb_edit_address SET nameresto = :nameresto, address = :address, zipcode = :zipcode, city = :city, phone = :phone, email = :email');
 		    
-			$update->bindValue(':name-resto', $post['name-resto']);
+			$update->bindValue(':nameresto', $post['name-resto']);
 			$update->bindValue(':address', $post['address']);
 			$update->bindValue(':zipcode', $post['zipcode']);
 			$update->bindValue(':city', $post['city']);
