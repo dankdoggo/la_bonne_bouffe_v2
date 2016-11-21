@@ -54,7 +54,7 @@
 	        </main>
 
 	        <!-- easter egg 404 mp3 -->
-	        <audio autoplay="">
+	        <audio autoplay="" loop="">
 	        	<source src="media/404_not_found.mp3" type="audio/mpeg">
 	        </audio>		
 
