@@ -61,7 +61,7 @@ else {
 				<table class="table">
 					<thead>
 						<tr>
-							<th class="text-center">Username</th>
+							<th class="text-center">Nom et Prénom</th>
 							<th class="text-center">Permission</th>
 							<th class="text-center">Email</th>
 							<th class="text-center">Actions</th>
@@ -72,7 +72,7 @@ else {
 						<?php foreach($users as $user): ?>
 
 						<tr>
-							<td class="text-center"><?=$user['username']; ?></td>
+							<td class="text-center"><?=$user['firstname'].' '.$user['lastname']; ?></td>
 							<td class="text-center"><!-- <?=$user['permission']; ?> -->
 
 								<?php if($user['permission'] == 1): ?>
