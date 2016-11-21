@@ -43,7 +43,7 @@ if(isset($_GET['id']) && is_numeric($_GET['id']) && !empty($_GET['id'])){
 		<section id="section-view-recipe">
 			<h1 class="title-section-list"><?=$recipe['title'];?></h1>
 			<div class="contain-img-list-recipe">
-				<img src="<?=$recipe['picture'];?>" alt="migale" class="img-list-recipe">
+				<img src="uploads/uploads_recipe/photo_recette_58315bbf60a41.jpg" alt="photo recette" class="img-list-recipe">
 			</div>
 		
 
