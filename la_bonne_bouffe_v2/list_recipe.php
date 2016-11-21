@@ -63,7 +63,8 @@ else {
 
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Source+Sans+Pro" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans|Source+Sans+Pro" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet"> 
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
@@ -99,7 +100,7 @@ else {
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 contain-img-text-list-recipe">
 								<div class="title-list-recipe"><?=preg_replace('/'.$get['search'].'/', '<span style="background:yellow;">'.$get['search'].'</span>', $value['title']);?></div>
 								<div class="contain-img-list-recipe">
-									<img src="<?=$value['picture'];?>" alt="recipe" class="img-list-recipe">
+									<img src="uploads/uploads_recipe/photo_recette_5831573a83dba.jpg" alt="recipe" class="img-list-recipe">
 								</div>	
 							</div>	
 							</a>
@@ -108,7 +109,7 @@ else {
 							<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 contain-img-text-list-recipe">
 								<div class="title-list-recipe"><?=$value['title'];?></div>
 								<div class="contain-img-list-recipe">
-									<img src="<?=$value['picture'];?>" alt="recipe" class="img-list-recipe">
+									<img src="uploads/uploads_recipe/photo_recette_5831573a83dba.jpg" alt="recipe" class="img-list-recipe">
 								</div>	
 							</div>	
 							</a>
