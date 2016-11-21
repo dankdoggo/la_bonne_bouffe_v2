@@ -9,18 +9,18 @@ $token = token_password();
 
 
 $errors = [];
-$get = [];
+$post= [];
 
 
 				
 // 
-if(!empty($_GET)){ 
-		$get = array_map('trim', array_map('strip_tags', $_GET));
+if(!empty($_POST)){ 
+		$post = array_map('trim', array_map('strip_tags', $_POST));
 
-	if(!filter_var($post['get'], FILTER_VALIDATE_EMAIL)){
+	if(!filter_var($post['email'], FILTER_VALIDATE_EMAIL)){
 		$errors[] = 'L\'adresse email est invalide';
 	}
-	if(!emailExist($get['email'], $bdd)){
+	if(!emailExist($post['email'], $bdd)){
 		$errors[] = 'l\'adresse email n\'existe pas';
 	}
 
@@ -30,14 +30,14 @@ if(!empty($_GET)){
 
 		
 	$insert->bindValue(':token', $token);
-	$insert->bindValue(':email', $get['email']);
+	$insert->bindValue(':email', $post['email']);
 
 		if($insert->execute()){ 
 				$formValid = true;
 				
 	
 			// le message qui sera envoyé
-			$email = $get['email'];
+			$email = $post['email'];
 				
 				$contentmail = '<a href="https://localhost/la_bonne_bouffe/admin/new_password.php?token='.$token.'&email='.$email.'">Bonjour, Veuillez cliquer sur le lien suivant pour modifier votre mot de passe </a>';
 				                             
@@ -69,6 +69,7 @@ if(!empty($_GET)){
 
 			else {
 				var_dump($insert->errorInfo()); // erreur admin requete SQL
+				echo 'ta race';
 			}
 	
 	}
@@ -108,7 +109,7 @@ if(!empty($_GET)){
 
 		<!-- AFFICHAGE DES ERREURS -->
 
-		<form>
+		
 			
 			<div class="col-sm-6 col-sm-push-3">
 				
@@ -116,7 +117,7 @@ if(!empty($_GET)){
 				
 				
 
-				<form method="GET">
+				<form method="POST">
 					
 					<p>Veuillez entrer votre adresse email pour recevoir un nouveau mot de passe</p>
 					<label for="email">Email</label><br>
